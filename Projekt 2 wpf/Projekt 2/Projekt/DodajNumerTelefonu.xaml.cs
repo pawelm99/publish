@@ -62,12 +62,11 @@ namespace Projekt
             
             if ((collections.Count == listValidationErrors.Count) && (ListBoxMiejsc.SelectedItem.ToString().Any() == true))
             {
+                var ViewModel = (RegistrationViewModel)DataContext;
 
-                powiadomienieSMS.NumerTelefonu = TextNumerTelefonuDN.Text;
-             
-                
-                powiadomienieSMS.Miasto = TextMiastoDN.Text;
-                powiadomienieSMS.StanZagrozenia = TextStanDN.Text;
+                powiadomienieSMS.NumerTelefonu = ViewModel.NumerTelefonuDN;
+                powiadomienieSMS.Miasto = ViewModel.MistoDN;
+                powiadomienieSMS.StanZagrozenia = ViewModel.StanZagrożeniaDN;
 
                 
                 var readDataBase = new ReadDataBase();

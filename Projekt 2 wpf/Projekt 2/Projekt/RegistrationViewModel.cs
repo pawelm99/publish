@@ -85,12 +85,7 @@ namespace Projekt
                             return "Wpisz Misto w którym jest numer";
                         }
                         break;
-                    case nameof(MiejscowośćDN):
-                        if (string.IsNullOrWhiteSpace(MiejscowośćDN))
-                        {
-                            return "Wpisz miejscowość do której numer jest przypisany";
-                        }
-                        break;
+               
                     default:
                         break;
                 }

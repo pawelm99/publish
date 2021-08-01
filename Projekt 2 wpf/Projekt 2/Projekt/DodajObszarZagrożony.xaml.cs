@@ -37,6 +37,7 @@ namespace Projekt
 
         private async void ClickFinal_Click(object sender, RoutedEventArgs e)
         {
+            var ViewModel = (RegistrationViewModel)DataContext;
             List<int> listErrorsValidations = new List<int>();
             
 
@@ -68,10 +69,10 @@ namespace Projekt
                 }
 
 
-                dataPomiaru.NazwaRzeki = TextNazwaRzekiPK.Text;
+                dataPomiaru.NazwaRzeki = ViewModel.NazwaRzeki;
 
-                pomiarRzeki.NazwaRzeki = TextNazwaRzekiPK.Text;
-                bool resoultDouble = double.TryParse(TextPoziomWody.Text, out double dPoziom);
+                pomiarRzeki.NazwaRzeki = ViewModel.NazwaRzeki;
+                bool resoultDouble = double.TryParse(ViewModel.PoziomWody, out double dPoziom);
                 if (resoultDouble == true)
                     pomiarRzeki.PoziomWody = dPoziom;
                 else
@@ -81,7 +82,7 @@ namespace Projekt
                 }
 
 
-                bool resoultDouble2 = double.TryParse(TextPoziomWodyStand.Text, out double dPoziomStand);
+                bool resoultDouble2 = double.TryParse(ViewModel.StaPoziomWody, out double dPoziomStand);
                 if (resoultDouble2 == true)
                     pomiarRzeki.StandardowyPoziom = dPoziomStand;
                 else
@@ -94,9 +95,9 @@ namespace Projekt
                 if ((resoultDouble2) && (resoultDouble) && (resoultTryParseDate))
                 {
 
-                    obszarZagrozony.Miasto = TextMiasto.Text;
-                    obszarZagrozony.Miejscowosc = TextMiejscowość.Text;
-                    obszarZagrozony.NazwaRzeki = TextNazwaRzekiPK.Text;
+                    obszarZagrozony.Miasto = ViewModel.Miasto;
+                    obszarZagrozony.Miejscowosc = ViewModel.Miejscowosc;
+                    obszarZagrozony.NazwaRzeki = ViewModel.NazwaRzeki;
 
                   
                     var readDataBase = new ReadDataBase();
