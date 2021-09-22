@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetAllPeople">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllPeopleResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllPeopleResult" type="tns:ArrayOfPerson" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfPerson">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Person" nillable="true" type="tns:Person" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Person">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Imię" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Nazwisko" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetOsoba">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOsobaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOsobaResult" type="tns:Person" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddOsoba">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="imie" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nazwisko" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddOsobaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddOsobaResult" type="tns:ArrayOfPerson" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveOsoba">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveOsobaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RemoveOsobaResult" type="tns:ArrayOfPerson" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetAllPeopleSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllPeople" />
+  </wsdl:message>
+  <wsdl:message name="GetAllPeopleSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllPeopleResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOsobaSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOsoba" />
+  </wsdl:message>
+  <wsdl:message name="GetOsobaSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOsobaResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddOsobaSoapIn">
+    <wsdl:part name="parameters" element="tns:AddOsoba" />
+  </wsdl:message>
+  <wsdl:message name="AddOsobaSoapOut">
+    <wsdl:part name="parameters" element="tns:AddOsobaResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoveOsobaSoapIn">
+    <wsdl:part name="parameters" element="tns:RemoveOsoba" />
+  </wsdl:message>
+  <wsdl:message name="RemoveOsobaSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoveOsobaResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WebServiceSoap">
+    <wsdl:operation name="GetAllPeople">
+      <wsdl:input message="tns:GetAllPeopleSoapIn" />
+      <wsdl:output message="tns:GetAllPeopleSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOsoba">
+      <wsdl:input message="tns:GetOsobaSoapIn" />
+      <wsdl:output message="tns:GetOsobaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddOsoba">
+      <wsdl:input message="tns:AddOsobaSoapIn" />
+      <wsdl:output message="tns:AddOsobaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveOsoba">
+      <wsdl:input message="tns:RemoveOsobaSoapIn" />
+      <wsdl:output message="tns:RemoveOsobaSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WebServiceSoap" type="tns:WebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAllPeople">
+      <soap:operation soapAction="http://tempuri.org/GetAllPeople" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOsoba">
+      <soap:operation soapAction="http://tempuri.org/GetOsoba" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddOsoba">
+      <soap:operation soapAction="http://tempuri.org/AddOsoba" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveOsoba">
+      <soap:operation soapAction="http://tempuri.org/RemoveOsoba" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WebServiceSoap12" type="tns:WebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAllPeople">
+      <soap12:operation soapAction="http://tempuri.org/GetAllPeople" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOsoba">
+      <soap12:operation soapAction="http://tempuri.org/GetOsoba" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddOsoba">
+      <soap12:operation soapAction="http://tempuri.org/AddOsoba" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveOsoba">
+      <soap12:operation soapAction="http://tempuri.org/RemoveOsoba" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WebService">
+    <wsdl:port name="WebServiceSoap" binding="tns:WebServiceSoap">
+      <soap:address location="https://localhost:44387/WebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WebServiceSoap12" binding="tns:WebServiceSoap12">
+      <soap12:address location="https://localhost:44387/WebService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

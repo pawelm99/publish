@@ -9,6 +9,8 @@ namespace Web
 {
     public class Person
     {
+        
+
         public Person()
         {
         }
@@ -23,5 +25,16 @@ namespace Web
         public int Id { get; set; }
         public string Imię { get; set; }
         public string Nazwisko { get; set; }
+
+        public override string ToString()
+        {
+            var stringBuilder = new StringBuilder();
+
+            stringBuilder.AppendLine($"Id: {Id}");
+            stringBuilder.AppendLine($"Imię: {Imię}");
+            stringBuilder.AppendLine($"Nazwisko: {Nazwisko}");
+            return stringBuilder.ToString();
+        }
+    
     }
 }
