@@ -4,12 +4,24 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.31321.278
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biblioteka", "Biblioteka\Biblioteka.csproj", "{405A3764-6153-487A-932B-3F9DF8F6F665}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4C005420-59AA-40E7-907C-DDF07D717359} = {4C005420-59AA-40E7-907C-DDF07D717359}
+		{B613FC8E-D0B5-4716-8B60-7F98EE9A6A01} = {B613FC8E-D0B5-4716-8B60-7F98EE9A6A01}
+		{8520E4BE-B3ED-4DFC-BE91-68B88CC79C67} = {8520E4BE-B3ED-4DFC-BE91-68B88CC79C67}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{4C005420-59AA-40E7-907C-DDF07D717359}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B613FC8E-D0B5-4716-8B60-7F98EE9A6A01} = {B613FC8E-D0B5-4716-8B60-7F98EE9A6A01}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{B613FC8E-D0B5-4716-8B60-7F98EE9A6A01}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{8520E4BE-B3ED-4DFC-BE91-68B88CC79C67}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4C005420-59AA-40E7-907C-DDF07D717359} = {4C005420-59AA-40E7-907C-DDF07D717359}
+		{B613FC8E-D0B5-4716-8B60-7F98EE9A6A01} = {B613FC8E-D0B5-4716-8B60-7F98EE9A6A01}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
