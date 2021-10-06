@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    class Książka
+    public class Ksiazka
     {
+        public int Id { get; set; }
+        public string nazwa { get; set; }
+        public string autor { get; set; }
+        public DateTime dataWydania { get; set; }
+        public string opis { get; set; }
     }
 }
