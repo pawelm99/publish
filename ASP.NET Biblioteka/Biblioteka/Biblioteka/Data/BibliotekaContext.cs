@@ -15,7 +15,5 @@ namespace Biblioteka.Data
         }
 
         public DbSet<Domain.Entities.Ksiazka> Ksiazka { get; set; }
-
-        public DbSet<Domain.Entities.Uzytkownik> Uzytkownik { get; set; }
     }
 }

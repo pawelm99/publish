@@ -42,24 +42,6 @@ namespace Biblioteka.Migrations
 
                     b.ToTable("Ksiazka");
                 });
-
-            modelBuilder.Entity("Domain.Entities.Uzytkownik", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Haslo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Login")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Uzytkownik");
-                });
 #pragma warning restore 612, 618
         }
     }
