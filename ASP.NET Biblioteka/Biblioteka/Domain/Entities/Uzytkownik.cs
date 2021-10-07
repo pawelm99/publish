@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,5 +11,9 @@ namespace Domain.Entities
     {
         public string Login { get; set; }
         public string  Haslo { get; set; }
+    }
+    public class UzytkownikDBContext : DbContext
+    {
+        public DbSet<Uzytkownik> Ksiazka { get; set; }
     }
 }
