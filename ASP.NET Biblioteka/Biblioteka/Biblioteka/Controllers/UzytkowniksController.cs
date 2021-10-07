@@ -22,7 +22,7 @@ namespace Biblioteka.Controllers
         // GET: Uzytkowniks
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Uzytkownik.ToListAsync());
+            return View();
         }
 
         // GET: Uzytkowniks/Details/5
