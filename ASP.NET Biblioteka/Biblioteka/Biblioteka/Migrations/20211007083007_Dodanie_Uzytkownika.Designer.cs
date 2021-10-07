@@ -4,14 +4,16 @@ using Biblioteka.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Biblioteka.Migrations
 {
     [DbContext(typeof(BibliotekaContext))]
-    partial class BibliotekaContextModelSnapshot : ModelSnapshot
+    [Migration("20211007083007_Dodanie_Uzytkownika")]
+    partial class Dodanie_Uzytkownika
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
