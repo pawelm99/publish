@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Domain.Entities.Uzytkownik>
+
+@{
+    ViewData["Title"] = "BookIt";
+}
+
+<h1>Rezerwacja</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Login)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(Model => item.Login)
+                </td>
+
+                <td>
+                 
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

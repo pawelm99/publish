@@ -20,10 +20,17 @@ namespace Biblioteka.Controllers
         }
 
         // GET: Uzytkowniks
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index([Bind("Id,Login,Haslo")] Uzytkownik uzytkownik)
         {
+            var a = _context.Uzytkownik.SingleOrDefault(x=>x.Login == uzytkownik.Login);
+            if(a.Haslo == uzytkownik.Haslo)
+            {
+                
+            }
             return View();
         }
+
+      
 
         // GET: Uzytkowniks/Details/5
         public async Task<IActionResult> Details(int? id)

@@ -8,24 +8,24 @@ using Microsoft.EntityFrameworkCore;
 using Biblioteka.Data;
 using Domain.Entities;
 
-namespace Biblioteka.Models
+namespace Biblioteka.Controllers
 {
-    public class KsiazkasController : Controller
+    public class RezerwacjasController : Controller
     {
         private readonly BibliotekaContext _context;
 
-        public KsiazkasController(BibliotekaContext context)
+        public RezerwacjasController(BibliotekaContext context)
         {
             _context = context;
         }
 
-        // GET: Ksiazkas
+        // GET: Rezerwacjas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Ksiazka.ToListAsync());
+            return View(await _context.Rezerwacja.ToListAsync());
         }
 
-        // GET: Ksiazkas/Details/5
+        // GET: Rezerwacjas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,42 +33,39 @@ namespace Biblioteka.Models
                 return NotFound();
             }
 
-            var ksiazka = await _context.Ksiazka
+            var rezerwacja = await _context.Rezerwacja
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (ksiazka == null)
+            if (rezerwacja == null)
             {
                 return NotFound();
             }
 
-            return View(ksiazka);
+            return View(rezerwacja);
         }
 
-        // GET: Ksiazkas/Create
+        // GET: Rezerwacjas/Create
         public IActionResult Create()
         {
             return View();
         }
-        public IActionResult BookIt()
-        {
-            return View();
-        }
-        // POST: Ksiazkas/Create
+
+        // POST: Rezerwacjas/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,nazwa,autor,dataWydania,opis")] Ksiazka ksiazka)
+        public async Task<IActionResult> Create([Bind("Id,KasiazkaId,UzytkownikId,dataRezerwacji")] Rezerwacja rezerwacja)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(ksiazka);
+                _context.Add(rezerwacja);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(ksiazka);
+            return View(rezerwacja);
         }
 
-        // GET: Ksiazkas/Edit/5
+        // GET: Rezerwacjas/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -76,22 +73,22 @@ namespace Biblioteka.Models
                 return NotFound();
             }
 
-            var ksiazka = await _context.Ksiazka.FindAsync(id);
-            if (ksiazka == null)
+            var rezerwacja = await _context.Rezerwacja.FindAsync(id);
+            if (rezerwacja == null)
             {
                 return NotFound();
             }
-            return View(ksiazka);
+            return View(rezerwacja);
         }
 
-        // POST: Ksiazkas/Edit/5
+        // POST: Rezerwacjas/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,nazwa,autor,dataWydania,opis")] Ksiazka ksiazka)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,KasiazkaId,UzytkownikId,dataRezerwacji")] Rezerwacja rezerwacja)
         {
-            if (id != ksiazka.Id)
+            if (id != rezerwacja.Id)
             {
                 return NotFound();
             }
@@ -100,12 +97,12 @@ namespace Biblioteka.Models
             {
                 try
                 {
-                    _context.Update(ksiazka);
+                    _context.Update(rezerwacja);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!KsiazkaExists(ksiazka.Id))
+                    if (!RezerwacjaExists(rezerwacja.Id))
                     {
                         return NotFound();
                     }
@@ -116,10 +113,10 @@ namespace Biblioteka.Models
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(ksiazka);
+            return View(rezerwacja);
         }
 
-        // GET: Ksiazkas/Delete/5
+        // GET: Rezerwacjas/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -127,30 +124,30 @@ namespace Biblioteka.Models
                 return NotFound();
             }
 
-            var ksiazka = await _context.Ksiazka
+            var rezerwacja = await _context.Rezerwacja
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (ksiazka == null)
+            if (rezerwacja == null)
             {
                 return NotFound();
             }
 
-            return View(ksiazka);
+            return View(rezerwacja);
         }
 
-        // POST: Ksiazkas/Delete/5
+        // POST: Rezerwacjas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var ksiazka = await _context.Ksiazka.FindAsync(id);
-            _context.Ksiazka.Remove(ksiazka);
+            var rezerwacja = await _context.Rezerwacja.FindAsync(id);
+            _context.Rezerwacja.Remove(rezerwacja);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool KsiazkaExists(int id)
+        private bool RezerwacjaExists(int id)
         {
-            return _context.Ksiazka.Any(e => e.Id == id);
+            return _context.Rezerwacja.Any(e => e.Id == id);
         }
     }
 }
