@@ -40,7 +40,7 @@ namespace Evento.Infrastructure.Services
 
             };
 
-            return a;
+            return _mapper.Map<EventDto>(@event);
         }
         
 
