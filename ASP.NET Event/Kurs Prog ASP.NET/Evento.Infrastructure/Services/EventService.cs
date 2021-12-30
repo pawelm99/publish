@@ -16,6 +16,7 @@ namespace Evento.Infrastructure.Services
         public EventServices(IEventRepository eventRepository,IMapper mapper)
         {
             _eventRepository = eventRepository;
+            _mapper = mapper;
         }
         public async Task<EventDto> GetAsync(Guid id)
         {
