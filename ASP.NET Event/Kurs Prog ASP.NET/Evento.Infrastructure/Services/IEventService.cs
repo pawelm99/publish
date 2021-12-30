@@ -11,7 +11,7 @@ namespace Evento.Infrastructure.Services
     {
         Task<EventDto> GetAsync(Guid id);
         Task<EventDto> GetAsync(string name);
-        Task<IEnumerable<EventDto>> BrowseAsync(string name);
+        Task<IEnumerable<EventDto>> BrowseAsync();
         Task AddTicketAsync(Guid eventId,int amount, decimal price);
         Task CreateAsync(Guid id, string name, string desc,DateTime startTime, DateTime endDate);
         Task UpdateAsync(Guid id, string name, string desc,DateTime startTime, DateTime endDate);

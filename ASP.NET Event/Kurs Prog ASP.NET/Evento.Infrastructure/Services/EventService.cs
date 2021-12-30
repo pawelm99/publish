@@ -28,16 +28,26 @@ namespace Evento.Infrastructure.Services
         public async Task<EventDto> GetAsync(string name)
         {
             var @event = await _eventRepository.GetAsync(name);
+            var a = new EventDto()
+            {
+                Id = Guid.NewGuid(),
+                Name = @event.Name,
+                Description = @event.Description,
+                StartDate = DateTime.UtcNow,
+                EndDate = DateTime.UtcNow.AddHours(4),
+                TicketsCount = 2,
+                UpdateAt = DateTime.UtcNow.AddHours(10),
 
+            };
 
-            return _mapper.Map<EventDto>(@event);
+            return a;
         }
         
 
-        public async Task<IEnumerable<EventDto>> BrowseAsync(string name = "")
+        public async Task<IEnumerable<EventDto>> BrowseAsync()
         {
-            var events = await _eventRepository.BrowseAsync(name);
-
+            var events = await _eventRepository.BrowseAsync();
+          
 
             return _mapper.Map<IEnumerable<EventDto>>(events);
         }

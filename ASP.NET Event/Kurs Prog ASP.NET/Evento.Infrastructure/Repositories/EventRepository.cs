@@ -12,7 +12,7 @@ namespace Evento.Infrastructure.Repositories
     {
         private static readonly ISet<Event> _events = new HashSet<Event>()
         {
-            new Event(Guid.NewGuid(), "Event 1","Event 1 desc",
+            new Event(Guid.NewGuid(), "Event1","Event 1 desc",
                 DateTime.UtcNow.AddHours(2),DateTime.UtcNow.AddHours(4))
         };
         public async Task<Event> GetAsync(Guid id)
@@ -22,13 +22,12 @@ namespace Evento.Infrastructure.Repositories
             => await Task.FromResult(_events.SingleOrDefault(x => x.Name.ToLowerInvariant() == name.ToLowerInvariant()));
 
 
-        public async Task<IEnumerable<Event>> BrowseAsync(string name=" ")
+        public async Task<IEnumerable<Event>> BrowseAsync()
         {
-            var events = _events.AsEnumerable();
-            if (!string.IsNullOrWhiteSpace(name))
-            {
-                events=events.Where(x => x.Name.ToLowerInvariant().Contains(name.ToLowerInvariant()));
-            }
+
+
+            var events = _events;
+            
             return await Task.FromResult(events);
         }
         public async Task AddAsync(Event @event)
