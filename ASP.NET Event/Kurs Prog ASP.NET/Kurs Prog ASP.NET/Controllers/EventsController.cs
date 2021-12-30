@@ -13,9 +13,9 @@ namespace Kurs_Prog_ASP.NET.Controllers
         }
        
         [HttpGet]
-        public async Task<IActionResult> Get( string name = "Event1")
+        public async Task<IActionResult> Get( string name = "")
         {
-            var events = await _eventServices.GetAsync(name);
+            var events = await _eventServices.BrowseAsync(name);
             return Json(events);
         }
   

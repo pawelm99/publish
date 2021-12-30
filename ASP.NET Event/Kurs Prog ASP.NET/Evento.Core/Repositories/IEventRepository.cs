@@ -11,7 +11,7 @@ namespace Evento.Core.Repositories
     {
         Task<Event> GetAsync(Guid id);
         Task<Event> GetAsync(string name);
-        Task<IEnumerable<Event>> BrowseAsync();
+        Task<IEnumerable<Event>> BrowseAsync(string name ="");
         Task AddAsync(Event @event);
         Task UpdateAsync(Event @event);
         Task DeleteAsync(Event @event);

@@ -45,9 +45,9 @@ namespace Evento.Infrastructure.Services
         }
         
 
-        public async Task<IEnumerable<EventDto>> BrowseAsync()
+        public async Task<IEnumerable<EventDto>> BrowseAsync(string name = "")
         {
-            var events = await _eventRepository.BrowseAsync();
+            var events = await _eventRepository.BrowseAsync(name);
           
 
             return _mapper.Map<IEnumerable<EventDto>>(events);
