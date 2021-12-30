@@ -15,7 +15,7 @@ namespace Evento.Infrastructure.Repositories
           => await Task.FromResult(_users.SingleOrDefault(x => x.Id == id));
 
 
-        public async Task<User> GetAsync(string email)
+        public async Task<User> GetAsync(string name)
          => await Task.FromResult(_users.SingleOrDefault(x => x.Name.ToLowerInvariant() == name.ToLowerInvariant()));
 
         public async Task AddAsync(User user)
