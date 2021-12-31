@@ -10,6 +10,11 @@ var builder = WebApplication.CreateBuilder(args);
 //builder.Services.AddRazorPages();
 builder.Services.AddControllers();
 builder.Services.AddMvc(options => options.EnableEndpointRouting = false);
+builder.Services.AddMvc().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.WriteIndented = true;
+});
+
 builder.Services.AddScoped<IEventRepository, EventRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IEventService,EventServices>();
