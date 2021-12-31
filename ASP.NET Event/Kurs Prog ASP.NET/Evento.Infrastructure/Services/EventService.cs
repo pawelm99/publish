@@ -60,7 +60,7 @@ namespace Evento.Infrastructure.Services
             var @event = await _eventRepository.GetAsync(name);
             if(@event != null)
             {
-                throw new Exception($"Event named: {name} alredy existed");
+                throw new Exception($"Event named: '{name}' alredy existed");
             }
             @event = new Event(id,name,desc,startTime,endDate);
             await _eventRepository.AddAsync(@event);
@@ -68,12 +68,32 @@ namespace Evento.Infrastructure.Services
 
         public async Task AddTicketAsync(Guid eventId, int amount, decimal price)
         {
-            throw new NotImplementedException();
+            var @event = await _eventRepository.GetAsync(eventId);
+            if(@event != null)
+            {
+                throw new Exception($"Event with id: '{eventId}' does not exist.");
+            }
+            @event.AddTickets(amount, price);
+            await _eventRepository.UpdateAsync(@event);
         }
 
-        public async Task UpdateAsync(Guid id, string name, string desc, DateTime startTime, DateTime endDate)
+        public async Task UpdateAsync(Guid id, string name, string desc)
         {
-            throw new NotImplementedException();
+            var @event = await _eventRepository.GetAsync(id);
+            if (@event != null)
+            {
+                throw new Exception($"Event with id: '{id}' does not exist.");
+            }
+
+            @event = await _eventRepository.GetAsync(name);
+            if (@event != null)
+            {
+                throw new Exception($"Event with name: '{name}' does not exist.");
+            }
+            @event.SetName(name);
+            @event.SetDesc(desc);
+            await _eventRepository.UpdateAsync(@event);
+
         }
         public async Task DeleteAsync(Guid id)
         {

@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 //builder.Services.AddRazorPages();
 builder.Services.AddControllers();
+builder.Services.AddSwaggerGen();
 builder.Services.AddMvc(options => options.EnableEndpointRouting = false);
 builder.Services.AddMvc().AddJsonOptions(options =>
 {
@@ -21,14 +22,19 @@ builder.Services.AddScoped<IEventService,EventServices>();
 builder.Services.AddSingleton(AutoMapperConfig.Initial());
 
 var app = builder.Build();
-
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
-   
+ 
+    
 }
 /*app.MapControllerRoute(
     name: "default",
@@ -40,7 +46,11 @@ app.UseCors();
 app.UseRouting();
 
 app.UseAuthorization();
-
+app.UseSwaggerUI(options =>
+{
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+    options.RoutePrefix = string.Empty;
+});
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
@@ -48,3 +58,4 @@ app.UseEndpoints(endpoints =>
 //app.MapRazorPages();
 app.UseMvc();
 app.Run();
+

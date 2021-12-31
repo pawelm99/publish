@@ -24,8 +24,8 @@ namespace Evento.Core.Domain
         public Event(Guid id, string name, string desc, DateTime start,DateTime end)
         {
             Id = id;
-            Name = name;
-            Description = desc;
+            SetName(name);
+            SetDesc(desc);
             StartDate = start;
             EndDate = end;
             CreatedAt= DateTime.UtcNow;
@@ -40,6 +40,25 @@ namespace Evento.Core.Domain
                 _tickets.Add(new Ticket(this,0,price));
                 seating++;
             }
+        }
+
+        public void SetName(string name)
+        {
+            if(string.IsNullOrWhiteSpace(name))
+            {
+                throw new Exception($"Event with id: '{Id}' can not have an empty name.");
+            }
+            Name = name;
+            UpdateAt= DateTime.UtcNow;
+        }
+        public void SetDesc(string desc)
+        {
+            if (string.IsNullOrWhiteSpace(desc))
+            {
+                throw new Exception($"Event with id: '{Id}' can not have an empty desc.");
+            }
+            Description = desc;
+            
         }
 
     }
