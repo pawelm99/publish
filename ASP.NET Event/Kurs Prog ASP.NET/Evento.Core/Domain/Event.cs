@@ -15,7 +15,9 @@ namespace Evento.Core.Domain
         public DateTime StartDate { get; protected set; }
         public DateTime EndDate { get; protected set; }
         public DateTime UpdateAt { get; protected set; }
-        public IEnumerable<Ticket> Trickets => _tickets;
+        public IEnumerable<Ticket> Tickets => _tickets;
+        public IEnumerable<Ticket> PurchatesTrickets => Tickets.Where(x=>x.Purchased);
+        public IEnumerable<Ticket> AveliableTrickets => Tickets.Except(PurchatesTrickets);
 
         protected Event()
         {

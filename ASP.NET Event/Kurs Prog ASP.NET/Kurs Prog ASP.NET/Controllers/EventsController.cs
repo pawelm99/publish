@@ -20,6 +20,17 @@ namespace Kurs_Prog_ASP.NET.Controllers
             return Json(events);
         }
 
+        [HttpGet("eventId")]
+        public async Task<IActionResult> Get(Guid eventId)
+        {
+            var @event = await _eventServices.GetAsync(eventId);
+            if(@event==null)
+            {
+                return NotFound();
+            }
+            return Json(@event);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateEvent command)
         {
@@ -31,6 +42,8 @@ namespace Kurs_Prog_ASP.NET.Controllers
 
             return Created($"/events/{command.EventId}", null);
         }
+
+       
         [HttpPut("{eventId}")]
         public async Task<IActionResult> Put(Guid eventId,[FromBody] UpdateEvent command)
         {
@@ -38,6 +51,16 @@ namespace Kurs_Prog_ASP.NET.Controllers
             await _eventServices.UpdateAsync(eventId, command.Name,
                 command.Description);
           
+
+            return NoContent();
+        }
+
+        [HttpDelete("{eventId}")]
+        public async Task<IActionResult> Delete(Guid eventId)
+        {
+
+            await _eventServices.DeleteAsync(eventId);
+
 
             return NoContent();
         }
