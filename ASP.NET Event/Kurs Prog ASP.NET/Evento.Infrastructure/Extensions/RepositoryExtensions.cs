@@ -13,7 +13,7 @@ namespace Evento.Infrastructure.Extensions
         public static async Task<Event> GetOrFailAsync(this IEventRepository eventRepository,Guid id)
         {
             var @event = await eventRepository.GetAsync(id);
-            if (@event != null)
+            if (@event == null)
             {
                 throw new Exception($"Event with id: '{id}' does not exist.");
             }
