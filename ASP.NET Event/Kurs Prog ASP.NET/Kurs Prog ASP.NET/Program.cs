@@ -19,6 +19,7 @@ builder.Services.AddMvc().AddJsonOptions(options =>
 builder.Services.AddScoped<IEventRepository, EventRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IEventService,EventServices>();
+builder.Services.AddScoped<IUserService,UserService>();
 builder.Services.AddSingleton(AutoMapperConfig.Initial());
 
 var app = builder.Build();
