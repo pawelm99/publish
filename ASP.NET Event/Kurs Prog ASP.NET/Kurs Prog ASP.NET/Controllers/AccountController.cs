@@ -1,5 +1,6 @@
 ﻿using Evento.Infrastructure.Commands.Users;
 using Evento.Infrastructure.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Kurs_Prog_ASP.NET.Controllers
@@ -12,10 +13,9 @@ namespace Kurs_Prog_ASP.NET.Controllers
             _userService= userService;
         }
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Get()
-        {
-            throw new NotImplementedException();
-        }
+       =>Json(await _userService.GetAccountAsync());
 
         [HttpGet("tickets")]
         public async Task<IActionResult> GetTickets()
@@ -32,9 +32,7 @@ namespace Kurs_Prog_ASP.NET.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Post()
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<IActionResult> Post(Login command)
+        => Json(await _userService.LoginAsync(command.Email, command.Password));
     }
 }

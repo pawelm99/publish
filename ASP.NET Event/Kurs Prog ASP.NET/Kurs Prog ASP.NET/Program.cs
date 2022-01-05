@@ -54,6 +54,7 @@ builder.Services.AddScoped<IEventRepository, EventRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IEventService,EventServices>();
 builder.Services.AddScoped<IUserService,UserService>();
+builder.Services.AddSingleton<IJwtHandler,JwtHandler>();
 builder.Services.AddSingleton(AutoMapperConfig.Initial());
 
 

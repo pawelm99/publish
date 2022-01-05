@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Evento.Infrastructure.DTO
 {
-    public class JwtDto
+    public class TokenDto
     {
-        public string Token { get; set; }
+        public string Token { get; set; } 
+        public string Role { get; set; }
         public long Expires { get; set; }
-
     }
 }

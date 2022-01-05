@@ -45,7 +45,7 @@ namespace Evento.Infrastructure.Services
             return new JwtDto
             {
                 Token = token,
-                Expires = expires.ToTimestamp().ToString()
+                Expires = expires.ToTimestamp()
             };
         }
     }
