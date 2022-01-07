@@ -5,17 +5,18 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Kurs_Prog_ASP.NET.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : ApiControllerBase
     {
         private IUserService _userService;
         public AccountController(IUserService userService)
         {
             _userService= userService;
         }
+
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> Get()
-       =>Json(await _userService.GetAccountAsync());
+       =>Json(await _userService.GetAccountAsync(UserId));
 
         [HttpGet("tickets")]
         public async Task<IActionResult> GetTickets()

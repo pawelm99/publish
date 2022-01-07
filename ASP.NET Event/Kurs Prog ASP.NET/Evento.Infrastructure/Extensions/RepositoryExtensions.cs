@@ -25,7 +25,7 @@ namespace Evento.Infrastructure.Extensions
             var user = await userRepository.GetAsync(id);
             if (user == null)
             {
-                throw new Exception($"Event with id: '{id}' does not exist.");
+                throw new Exception($"User with id: '{id}' does not exist.");
             }
             return user;
         }

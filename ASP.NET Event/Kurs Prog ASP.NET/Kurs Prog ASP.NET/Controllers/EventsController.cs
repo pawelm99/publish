@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Kurs_Prog_ASP.NET.Controllers
 {
     [Route("[controller]")]
-    public class EventsController : Controller
+    public class EventsController : ApiControllerBase
     {
         private readonly IEventService _eventServices;
         public EventsController(IEventService eventServices)
