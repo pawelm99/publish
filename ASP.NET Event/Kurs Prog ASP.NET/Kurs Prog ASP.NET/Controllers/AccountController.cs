@@ -1,5 +1,6 @@
 ﻿using Evento.Infrastructure.Commands.Users;
 using Evento.Infrastructure.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,7 +15,7 @@ namespace Kurs_Prog_ASP.NET.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> Get()
        =>Json(await _userService.GetAccountAsync(UserId));
 

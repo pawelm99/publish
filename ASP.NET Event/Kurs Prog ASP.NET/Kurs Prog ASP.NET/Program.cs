@@ -3,7 +3,9 @@ using Evento.Infrastructure.Mappers;
 using Evento.Infrastructure.Repositories;
 using Evento.Infrastructure.Services;
 using Evento.Infrastructure.Settings;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -13,28 +15,19 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-void ConfigureServices(IServiceCollection services)
-{
-    
 
-    var serviceProvider = services.BuildServiceProvider();
-    var JwTservice = serviceProvider.GetService<IOptions<JwtSettings>>();
-    builder.Services.AddAuthentication(o =>
-    {
 
-        o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-        o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    }).AddJwtBearer(o =>
-    {
-        //AutomaticAuthenticate = false,
-        o.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidIssuer = JwTservice.Value.Issuer,
-            ValidateAudience = false,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwTservice.Value.Key))
-        };
-    });
-}
+/*   builder.Services.AddAuthorization(auth =>
+     {
+         auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder(JwtBearerDefaults.AuthenticationScheme)
+                 .RequireAuthenticatedUser()
+                 .Build());
+     });*/
+
+
+
+
+
 
 System.Configuration.Configuration config =
                System.Configuration.ConfigurationManager.OpenExeConfiguration(
@@ -59,9 +52,24 @@ builder.Services.AddSingleton<IJwtHandler,JwtHandler>();
 builder.Services.AddSingleton(AutoMapperConfig.Initial());
 
 
-
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(o =>
+    {
+        IISServerOptions iISServerOptions = new IISServerOptions();
+        iISServerOptions.AutomaticAuthentication = true;
+        var serviceProvider = builder.Services.BuildServiceProvider();
+        var JwTservice = serviceProvider.GetService<IOptions<JwtSettings>>();
+        o.TokenValidationParameters = new TokenValidationParameters
+        {
+            
+            ValidIssuer = JwTservice.Value.Issuer,
+            ValidateAudience = false,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwTservice.Value.Key))
+        };
+    });
 
 var app = builder.Build();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -73,17 +81,23 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
- 
     
+
+
+
 }
 
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseCors();
-app.UseRouting();
 
+app.UseAuthentication();
+
+app.UseRouting();
 app.UseAuthorization();
+
+
 app.UseSwaggerUI(options =>
 {
     options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
@@ -96,5 +110,6 @@ app.UseEndpoints(endpoints =>
 
 
 app.UseMvc();
+
 app.Run();
 

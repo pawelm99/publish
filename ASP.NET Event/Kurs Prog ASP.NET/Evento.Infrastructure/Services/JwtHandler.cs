@@ -36,10 +36,13 @@ namespace Evento.Infrastructure.Services
             var expires = now.AddMinutes(_jwtSettings.ExpiryMinutes);
             var signingCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key)),
              SecurityAlgorithms.HmacSha256);
-            var jwt = new JwtSecurityToken(issuer: _jwtSettings.Issuer,
-                claims: clains,notBefore:now,
+            var jwt = new JwtSecurityToken(
+                issuer: _jwtSettings.Issuer,
+                claims: clains,
+                notBefore:now,
                 expires:expires,
                 signingCredentials: signingCredentials);
+
             var token = new JwtSecurityTokenHandler().WriteToken(jwt);
 
             return new JwtDto
