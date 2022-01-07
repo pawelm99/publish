@@ -6,6 +6,7 @@ using Evento.Infrastructure.Settings;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Configuration;
 using System.Text;
@@ -17,7 +18,7 @@ void ConfigureServices(IServiceCollection services)
     
 
     var serviceProvider = services.BuildServiceProvider();
-    var JwTservice = serviceProvider.GetService<JwtSettings>();
+    var JwTservice = serviceProvider.GetService<IOptions<JwtSettings>>();
     builder.Services.AddAuthentication(o =>
     {
 
@@ -28,9 +29,9 @@ void ConfigureServices(IServiceCollection services)
         //AutomaticAuthenticate = false,
         o.TokenValidationParameters = new TokenValidationParameters
         {
-            ValidIssuer = JwTservice.Issuer,
+            ValidIssuer = JwTservice.Value.Issuer,
             ValidateAudience = false,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwTservice.Key))
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwTservice.Value.Key))
         };
     });
 }
@@ -49,7 +50,7 @@ builder.Services.AddMvc().AddJsonOptions(options =>
     options.JsonSerializerOptions.WriteIndented = true;
     
 });
-
+builder.Services.AddAuthorization();
 builder.Services.AddScoped<IEventRepository, EventRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IEventService,EventServices>();

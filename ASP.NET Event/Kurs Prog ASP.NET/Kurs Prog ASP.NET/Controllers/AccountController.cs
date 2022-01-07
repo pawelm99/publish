@@ -25,7 +25,7 @@ namespace Kurs_Prog_ASP.NET.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Post(Register command)
+        public async Task<IActionResult> Post([FromBody]Register command)
         {
             await _userService.RegisterAsync(Guid.NewGuid(),
                 command.Email, command.Name, command.Password, command.Role);

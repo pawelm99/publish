@@ -17,7 +17,7 @@ namespace Evento.Infrastructure.Services
         private readonly IUserRepository _userRepository;
         private readonly IJwtHandler _jwtHandler;
         private readonly IMapper _mapper;
-        public UserService(UserRepository userRepository,IJwtHandler jwtHandler,IMapper mapper)
+        public UserService(IUserRepository userRepository,IJwtHandler jwtHandler,IMapper mapper)
         {
             _userRepository = userRepository;
             _jwtHandler = jwtHandler;
