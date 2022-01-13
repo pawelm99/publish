@@ -23,11 +23,12 @@ namespace Evento.Core.Domain
         {
 
         }
-        public Event(Guid id, string name, string desc, DateTime start,DateTime end)
+        public Event(Guid id, string name, string desc,int iloscBiletow, decimal price,DateTime start,DateTime end)
         {
             Id = id;
             SetName(name);
             SetDesc(desc);
+            AddTickets(iloscBiletow,price);
             StartDate = start;
             EndDate = end;
             CreatedAt= DateTime.UtcNow;
@@ -37,7 +38,7 @@ namespace Evento.Core.Domain
         public void AddTickets(int amount,decimal price)
         {
             var seating = _tickets.Count+1;
-            for (int i = 0; i < amount; i--)
+            for (int i = 0; i < amount; i++)
             {
                 _tickets.Add(new Ticket(this,0,price));
                 seating++;

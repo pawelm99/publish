@@ -55,7 +55,7 @@ namespace Evento.Infrastructure.Services
             return _mapper.Map<IEnumerable<EventDto>>(events);
         }
 
-        public async Task CreateAsync(Guid id, string name, string desc, DateTime startTime, DateTime endDate)
+        public async Task CreateAsync(Guid id, string name, string desc,int iloscBiletow,decimal cena, DateTime startTime, DateTime endDate)
         {
 
             var @event = await _eventRepository.GetAsync(name);
@@ -63,7 +63,7 @@ namespace Evento.Infrastructure.Services
             {
                 throw new Exception($"Event named: '{name}' alredy existed");
             }
-            @event = new Event(id,name,desc,startTime,endDate);
+            @event = new Event(id,name,desc, iloscBiletow, cena,startTime, endDate);
             await _eventRepository.AddAsync(@event);
         }
 

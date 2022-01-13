@@ -12,9 +12,9 @@ namespace Evento.Infrastructure.Repositories
     {
         private static readonly ISet<Event> _events = new HashSet<Event>()
         {
-            new Event(Guid.NewGuid(), "Event 1","Event 1 desc",
+            new Event(Guid.NewGuid(), "Event 1","Event 1 desc",10,5,
                 DateTime.UtcNow.AddHours(2),DateTime.UtcNow.AddHours(4)),
-             new Event(Guid.NewGuid(), "Event 2","Event 2 desc",
+             new Event(Guid.NewGuid(), "Event 2","Event 2 desc",100,3,
                 DateTime.UtcNow.AddHours(4),DateTime.UtcNow.AddHours(8))
         };
         public async Task<Event> GetAsync(Guid id)

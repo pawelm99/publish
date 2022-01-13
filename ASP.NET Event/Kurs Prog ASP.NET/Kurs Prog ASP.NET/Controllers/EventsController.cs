@@ -36,7 +36,7 @@ namespace Kurs_Prog_ASP.NET.Controllers
         {
             command.EventId = Guid.NewGuid();
             await _eventServices.CreateAsync(command.EventId, command.Name,
-                command.Description, command.StartDate, command.EndDate);
+                command.Description,command.Tickets,command.Price, command.StartDate, command.EndDate);
             await _eventServices.AddTicketAsync(command.EventId, command.Tickets,
                 command.Price);
 
