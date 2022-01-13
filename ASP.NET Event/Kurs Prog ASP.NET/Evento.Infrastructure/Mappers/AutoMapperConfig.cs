@@ -14,7 +14,10 @@ namespace Evento.Infrastructure.Mappers
         public static IMapper Initial() => new MapperConfiguration(cfg =>
         {
             cfg.CreateMap<Event, EventDto>()
-            .ForMember(x=>x.TicketsCount,m=>m.MapFrom(p=>p.Tickets.Count()));
+            
+            .ForMember(x => x.AvaliableTicketsCount, m => m.MapFrom(p => p.AveliableTrickets.Count()))
+            .ForMember(x => x.PurchasedTicketCount, m => m.MapFrom(p => p.PurchatesTrickets.Count()))
+            .ForMember(x => x.TicketsCount, m => m.MapFrom(p => p.Tickets.Count()));
             cfg.CreateMap<Event, EventDetailsDto>();
             cfg.CreateMap<Ticket,TicketsDto>();
             cfg.CreateMap<User, AccountDto>();
