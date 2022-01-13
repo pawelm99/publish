@@ -15,9 +15,9 @@ namespace Kurs_Prog_ASP.NET.Controllers
         }
 
         [HttpGet("{ticketId}")]
-        public async Task<IActionResult> Get(Guid eventId,Guid tricketId)
+        public async Task<IActionResult> Get(Guid eventId,Guid ticketId)
         {
-            var ticket = await _ticketService.GetAsync(UserId,eventId,tricketId);
+            var ticket = await _ticketService.GetAsync(UserId,eventId, ticketId);
             if(ticket == null)
             {
                 return NotFound();

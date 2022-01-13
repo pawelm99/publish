@@ -86,7 +86,7 @@ namespace Evento.Core.Domain
                 throw new Exception($"Not enough purchased tickets to be canceled ({amount}) by user: {user.Name}");
 
             }
-            foreach (var item in tickets)
+            foreach (var item in tickets.Take(amount))
             {
                 item.Cancel();
             }
