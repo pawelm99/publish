@@ -23,7 +23,19 @@ namespace Evento.Infrastructure.Services
             _mapper=mapper;
         }
 
-      
+
+        public async Task<IEnumerable<TicketDetailsDto>> GetForUserAsyc(Guid userId)
+        {
+            var user = await _userRepository.GetOrFailAsync(userId);
+            var events = await _eventRepository.BrowseAsync();
+            var trickets = events.SelectMany(x => x.GetTicketsPurchasedByUserId(user));
+            var allTickets = new List<TicketDetailsDto>();
+          /*  foreach (var @event in events)
+            {
+                var tickets = @event.GetTicketsPurchasedByUser
+            }*/
+            return _mapper.Map<IEnumerable<TicketDetailsDto>>(allTickets);
+        }
 
         public async Task<TicketsDto> GetAsync(Guid userId, Guid eventId, Guid ticketId)
         {
@@ -39,7 +51,7 @@ namespace Evento.Infrastructure.Services
             var @event = await _eventRepository.GetOrFailAsync(@eventId);
             @event.PurchatedTickets(user, amount);
             await _eventRepository.UpdateAsync(@event);
-            
+
         }
 
         public async Task CancelAsync(Guid userId, Guid eventId, int amount)
@@ -49,5 +61,7 @@ namespace Evento.Infrastructure.Services
             @event.CancelPurchasedTickets(user, amount);
             await Task.CompletedTask;
         }
+
+
     }
 }

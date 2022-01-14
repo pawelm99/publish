@@ -9,9 +9,11 @@ namespace Kurs_Prog_ASP.NET.Controllers
     public class AccountController : ApiControllerBase
     {
         private IUserService _userService;
-        public AccountController(IUserService userService)
+        private ITicketsService _ticketService;
+        public AccountController(IUserService userService,ITicketsService ticketsService)
         {
             _userService= userService;
+            _ticketService= ticketsService;
         }
 
         [HttpGet]
@@ -21,9 +23,7 @@ namespace Kurs_Prog_ASP.NET.Controllers
 
         [HttpGet("tickets")]
         public async Task<IActionResult> GetTickets()
-        {
-            throw new NotImplementedException();
-        }
+        => Json(await _ticketService.GetForUserAsyc(UserId));
 
         [HttpPost("register")]
         public async Task<IActionResult> Post([FromBody]Register command)
