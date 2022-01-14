@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Evento.Infrastructure.Services
 {
     public class TicketsService : ITicketsService
@@ -24,17 +25,24 @@ namespace Evento.Infrastructure.Services
         }
 
 
-        public async Task<IEnumerable<TicketsDto>> GetForUserAsyc(Guid userId)
+        public async Task<IEnumerable<TicketDetailsDto>> GetForUserAsyc(Guid userId)
         {
             var user = await _userRepository.GetOrFailAsync(userId);
             var events = await _eventRepository.BrowseAsync();
-            var tickets = events.SelectMany(x => x.GetTicketsPurchasedByUserId(user));
-            var allTickets = new List<TicketsDto>();
-          /*  foreach (var @event in events)
+            
+            var allTickets = new List<TicketDetailsDto>();
+            foreach (var @event in events)
             {
-                var tickets = @event.GetTicketsPurchasedByUser
-            }*/
-            return _mapper.Map<IEnumerable<TicketsDto>>(tickets);
+                var tickets =  _mapper.Map<IEnumerable<TicketDetailsDto>>(@event
+                    .GetTicketsPurchasedByUserId(user).ToList());
+                foreach (var item in tickets)
+                {
+                    item.EventId = @event.Id;
+                    item.EventName=@event.Name;
+                }
+                allTickets.AddRange(tickets);
+            }
+           return allTickets;
         }
 
         public async Task<TicketsDto> GetAsync(Guid userId, Guid eventId, Guid ticketId)
