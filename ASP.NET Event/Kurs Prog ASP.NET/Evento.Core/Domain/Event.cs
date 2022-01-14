@@ -29,12 +29,22 @@ namespace Evento.Core.Domain
             SetName(name);
             SetDesc(desc);
             AddTickets(iloscBiletow,price);
-            StartDate = start;
-            EndDate = end;
+            SetDate(StartDate,EndDate);
             CreatedAt= DateTime.UtcNow;
             UpdateAt = DateTime.UtcNow;
 
         }
+
+        public void SetDate(DateTime start, DateTime end)
+        {
+            if(start >= end)
+            {
+                throw new Exception($"Event with {Id} is invalid. Date must have greater than start date.");
+            }
+            StartDate = start;
+            EndDate = end;
+        }
+
         public void AddTickets(int amount,decimal price)
         {
             var seating = _tickets.Count+1;
