@@ -40,8 +40,8 @@ namespace Evento.Core.Domain
             var seating = _tickets.Count+1;
             for (int i = 0; i < amount; i++)
             {
-                _tickets.Add(new Ticket(this,0,price));
-                seating++;
+                _tickets.Add(new Ticket(this, seating, price));
+                seating--;
             }
         }
 
