@@ -1,3 +1,5 @@
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Evento.Core.Repositories;
 using Evento.Infrastructure.Mappers;
 using Evento.Infrastructure.Repositories;
@@ -13,6 +15,7 @@ using Microsoft.IdentityModel.Tokens;
 using NLog;
 using NLog.Extensions.Logging;
 using NLog.Web;
+using System.ComponentModel;
 using System.Configuration;
 using System.Text;
 
@@ -69,10 +72,32 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+    //Autofac
+    var serviceCollection = new ServiceCollection();
+    serviceCollection.AddLogging();
+    var containerBuilder = new ContainerBuilder();
+    containerBuilder.Populate(serviceCollection);
+    //containerBuilder.RegisterType<EventRepository>().As<IEventRepository>().InstancePerLifetimeScope();
+    var container = containerBuilder.Build();
+
+    var serviceProvider = new AutofacServiceProvider(container);
+    
+
+
+
+
+
+
+
+
+
+
+
     // NLog: Setup NLog for Dependency injection
     builder.Logging.ClearProviders();
     builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
     builder.Host.UseNLog();
+
 
 
     var app = builder.Build();
@@ -124,7 +149,7 @@ app.UseEndpoints(endpoints =>
 app.UseMvc();
 
 app.Run();
-
+app.Lifetime.ApplicationStopped.Register(()=> serviceProvider.Dispose());
 }
 catch (Exception exception)
 {
@@ -136,4 +161,5 @@ finally
 {
     // Ensure to flush and stop internal timers/threads before application-exit (Avoid segmentation fault on Linux)
     NLog.LogManager.Shutdown();
+    
 }
