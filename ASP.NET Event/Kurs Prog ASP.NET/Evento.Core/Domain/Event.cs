@@ -29,7 +29,7 @@ namespace Evento.Core.Domain
             SetName(name);
             SetDesc(desc);
             AddTickets(iloscBiletow,price);
-            SetDate(StartDate,EndDate);
+            SetDate(start,end);
             CreatedAt= DateTime.UtcNow;
             UpdateAt = DateTime.UtcNow;
 

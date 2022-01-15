@@ -1,6 +1,9 @@
 ﻿using Evento.Infrastructure.Commands.Events;
+using Evento.Infrastructure.DTO;
 using Evento.Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
+using System.Collections.Generic;
 
 namespace Kurs_Prog_ASP.NET.Controllers
 {
@@ -8,15 +11,29 @@ namespace Kurs_Prog_ASP.NET.Controllers
     public class EventsController : ApiControllerBase
     {
         private readonly IEventService _eventServices;
-        public EventsController(IEventService eventServices)
+        private readonly IMemoryCache _memomoryCache;
+        public EventsController(IEventService eventServices,IMemoryCache memoryCache)
         {
             _eventServices = eventServices;
+            _memomoryCache = memoryCache;
         }
 
         [HttpGet]
         public async Task<IActionResult> Get(string name = "")
         {
-            var events = await _eventServices.BrowseAsync(name);
+            var events = _memomoryCache.Get<IEnumerable<EventDto>>("events");
+            if(events == null)
+            {
+                Console.WriteLine("Fetching from services");
+                events = await _eventServices.BrowseAsync(name);
+                _memomoryCache.Set("events",events,TimeSpan.FromMinutes(1));
+            }
+            else
+            {
+                Console.WriteLine("Fetcinh from cache.");
+            }
+
+            
             return Json(events);
         }
 
