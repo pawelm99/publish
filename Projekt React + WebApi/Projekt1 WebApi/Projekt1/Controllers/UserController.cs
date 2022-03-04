@@ -20,7 +20,7 @@ namespace Projekt1.Controllers
         public IActionResult Get()
         {
             var users = _userService.GetAllUser();
-            return  Ok(users);
+            return Ok(users);
         }
 
         // GET api/<UserController>/5
