@@ -26,6 +26,7 @@ namespace Projekt1.Repository
         }
         public User AddUser(User user)
         {
+            user.Id = _users.Count +1;
             _users.Add(user);
             return user;
             // sprawdz to czy to nie wojd
