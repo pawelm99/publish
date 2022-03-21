@@ -1,83 +1,60 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Projekt1.Interface;
+using Projekt1.Models;
+
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Projekt1.Controllers
 {
-    public class EventController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class EventController : ControllerBase
     {
-        // GET: EventController
-        public ActionResult Index()
+        private readonly IEventService _eventService;
+
+        public EventController(IEventService eventService)
         {
-            return View();
+            _eventService=eventService;
         }
 
-        // GET: EventController/Details/5
-        public ActionResult Details(int id)
+        // GET: api/<EventController>
+        [HttpGet]
+        public IActionResult Get()
         {
-            return View();
+           var events = _eventService.GetAllEvents();
+            return Ok(events);
         }
 
-        // GET: EventController/Create
-        public ActionResult Create()
+        // GET api/<EventController>/5
+        [HttpGet("{name}")]
+        public IActionResult Get(string name)
         {
-            return View();
+            var @event = _eventService.GetByName(name);
+            return Ok(@event);
         }
 
-        // POST: EventController/Create
+        // POST api/<EventController>
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public IActionResult Post(Event @event)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            _eventService.AddEvent(@event);
+            return Ok("event created!");
         }
 
-        // GET: EventController/Edit/5
-        public ActionResult Edit(int id)
+        // PUT api/<EventController>/5
+        [HttpPut("{id}")]
+        public IActionResult Put(Event @event)
         {
-            return View();
+            _eventService.UpdateEvent(@event);
+            return Ok(NoContent());
         }
 
-        // POST: EventController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        // DELETE api/<EventController>/5
+        [HttpDelete("{id}")]
+        public IActionResult Delete(Guid id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: EventController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: EventController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            _eventService.DeleteEvent(id);
+            return Ok(NoContent());
         }
     }
 }
