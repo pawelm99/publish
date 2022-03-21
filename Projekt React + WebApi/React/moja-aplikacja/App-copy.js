@@ -21,24 +21,23 @@ function getUsers(){
   })
 }
 
-  return (
-    <div className='container'>
-      <dvi className='row min-vh-100'>
-        <div className='col d-flex flex-cloum justify-content-center align-items-center'>
-       
-          <div className='mt-5'>
-          <h1><center>Hello User!</center></h1>
-            <button onClick={getUsers} className="btn btn-dark btn-lg w-100">Get Users from server</button>
-            <button onClick={() => setShowingCreateNewPostForm(true)} className="btn btn-secondary btn-lg w-100 mt-4">Create New User</button>
-            </div>
+return (
+  <div className='container'>
+    <dvi className='row min-vh-100'>
+      <div className='col d-flex flex-cloum justify-content-center align-items-center'>
+     
+        <div className='mt-5'>
+        <h1><center>Hello User!</center></h1>
+          <button onClick={getUsers} className="btn btn-dark btn-lg w-100">Get Users from server</button>
           </div>
-          {(users.length > 0 && showingCreateNewPostFrom === false) && renderUserTable()}
-          {showingCreateNewPostFrom && <PostCreateForm onPostCreated ={onPostCreated} />}
-        </dvi>
-      
-      </div>
+        </div>
+        {(users.length > 0) && renderUserTable()}
+      </dvi>
     
-  );
+    </div>
+  
+);
+
   function renderUserTable()
   {
     return(

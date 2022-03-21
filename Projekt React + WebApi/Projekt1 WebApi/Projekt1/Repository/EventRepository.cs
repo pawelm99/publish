@@ -7,12 +7,15 @@ namespace Projekt1.Repository
     {
 
         private static List<Event> _events = new List<Event>() {
-            new Event(Guid.NewGuid(), "Zbieranie_jablek", new DateTime(2022,11,16)),
-            new Event(Guid.NewGuid(), "Walka_o_honor", new DateTime(2022,09,05)),
-            new Event(Guid.NewGuid(), "Melanz_w_katowicach", new DateTime(2023,01,03))
+            new Event(1, "Zbieranie_jablek", new DateTime(2022,11,16)),
+            new Event(2, "Walka_o_honor", new DateTime(2022,09,05)),
+            new Event(3, "Melanz_w_katowicach", new DateTime(2023,01,03))
         };
 
+        public EventRepository()
+        {
 
+        }
 
         public IEnumerable<Event> GetAllEvent()
         {
@@ -26,7 +29,7 @@ namespace Projekt1.Repository
         }
         public Event AddEvent(Event @event)
         {
-            @event.id= Guid.NewGuid();
+            @event.id= _events.Count()+1;
             _events.Add(@event);
             return @event;
         }
@@ -42,7 +45,7 @@ namespace Projekt1.Repository
             userId.date = @event.date;
 
         }
-        public void DeleteEvent(Guid id)
+        public void DeleteEvent(int id)
         {
             var eventid = _events.SingleOrDefault(x => x.id == id);
             _events.Remove(eventid);

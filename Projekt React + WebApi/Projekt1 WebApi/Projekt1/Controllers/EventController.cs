@@ -46,15 +46,15 @@ namespace Projekt1.Controllers
         public IActionResult Put(Event @event)
         {
             _eventService.UpdateEvent(@event);
-            return Ok(NoContent());
+            return NoContent();
         }
 
         // DELETE api/<EventController>/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(Guid id)
+        public IActionResult Delete(int id)
         {
             _eventService.DeleteEvent(id);
-            return Ok(NoContent());
+            return NoContent();
         }
     }
 }

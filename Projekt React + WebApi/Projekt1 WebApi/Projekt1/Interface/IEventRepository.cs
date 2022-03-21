@@ -4,20 +4,19 @@ namespace Projekt1.Interface
 {
     public interface IEventRepository
     {
-        public IEnumerable<Event> GetAllUser();
+         IEnumerable<Event> GetAllEvent();
 
-        public Event GetByName(string name);
+         Event GetByName(string name);
 
-        public Event AddEvent(Event @event);
+         Event AddEvent(Event @event);
 
-        public void UpdateEvent(Event @event);
+         void UpdateEvent(Event @event);
 
 
-        public void DeleteEvent(Guid id);
+         void DeleteEvent(int id);
 
     }
 }
 
 
-}
-}
+

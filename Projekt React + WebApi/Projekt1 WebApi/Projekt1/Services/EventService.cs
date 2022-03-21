@@ -31,7 +31,7 @@ namespace Projekt1.Services
             _eventService.UpdateEvent(user);
         }
 
-        public void DeleteEvent(Guid id)
+        public void DeleteEvent(int id)
         {
             _eventService.DeleteEvent(id);
         }

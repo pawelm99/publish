@@ -8,8 +8,8 @@ namespace Projekt1.Interface
 
         Event GetByName(string name);
 
-        Event AddEvent(Event user);
-        void UpdateEvent(Event user);
-        void DeleteEvent(Guid id);
+        Event AddEvent(Event @event);
+        void UpdateEvent(Event @event);
+        void DeleteEvent(int id);
     }
 }
