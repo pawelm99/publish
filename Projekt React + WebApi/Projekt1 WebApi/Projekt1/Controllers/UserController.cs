@@ -20,7 +20,7 @@ namespace Projekt1.Controllers
         public IActionResult Get()
         {
             var users = _userService.GetAllUser();
-            return Ok(users);
+            return  Ok(users);
         }
 
         // GET api/<UserController>/5
@@ -40,7 +40,7 @@ namespace Projekt1.Controllers
         public IActionResult Post(User user)
         {
             var userAd = _userService.AddUser(user);
-            return Created($"api/user/{user.Id}", userAd);
+            return Ok("User Created");
         }
 
         // PUT api/<UserController>/5
