@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import EventCreateForm from "./components/EventCreateForm";
-import EventUpdateForm from "./components/EventUpdateForm";
-
 export default function App(){
   const [events,setEvents] = useState([]);
   const [showingCreateNewEventFrom, setShowingCreateNewEventForm] = useState(false);
-  const [eventCurrentlyBegingUpdated, setEventCurrentlyBegingUpdated] = useState(null);
 
   function getEvents(){
     const url = 'https://localhost:7156/api/Event';
@@ -23,15 +20,11 @@ export default function App(){
     })
   }
 
-
-
-
   return (
     <div className='container'>
       <div className='row min-vh-100'>
         <div className='col d-flex flex-cloum justify-content-center align-items-center'>
-
-       {(showingCreateNewEventFrom === false && eventCurrentlyBegingUpdated === null)(
+       {showingCreateNewEventFrom === false && (
          <div>
              <h1>Hello !</h1>
 
@@ -43,9 +36,8 @@ export default function App(){
        )}
        
          
-          {(events.length > 0 && showingCreateNewEventFrom === false && eventCurrentlyBegingUpdated ===null)  && renderUserTable()}
+          {(events.length > 0 && showingCreateNewEventFrom ===false ) && renderUserTable()}
           {showingCreateNewEventFrom && <EventCreateForm onEventCreated = {onEventCreated}/>}
-          {eventCurrentlyBegingUpdated != null && <EventUpdateForm event ={eventCurrentlyBegingUpdated} onEventUpdate={onEventUpdate}/>}
           </div>
         </div>
         </div>
@@ -55,16 +47,14 @@ export default function App(){
   );
 
 
-
-  
-function renderUserTable()
-  {
-    return(
-      <div className='table-reponsive mt-5'>
+  function renderUserTable()
+    {
+      return(
+        <div className='table-reponsive mt-5'>
         <table className='table table-bordered border-dark'>
           <thead>
             <tr>
-            <th scope='col'>EventId</th>
+              <th scope='col'>EventId</th>
               <th scope='col'>Name</th>
               <th scope='col'>Password</th>
 
@@ -72,25 +62,22 @@ function renderUserTable()
               </thead>
               
               <tbody>
-              {events.map((event)=>(
+                {events.map((event)=>(
                   <tr key={event.id}>
                     <td>{event.id}</td>
                     <td>{event.name}</td>
                     <td>{event.date}</td>
-                    <td><button onClick={()=> setEventCurrentlyBegingUpdated(event) } className='btn btn-dark btn-lg mx-3 my-3'>UPDATE</button>
-                    <button className='btn btn-secondary btn-lg'>DELETE</button>
+
                      
-                     </td>
+                 
                     </tr> 
-                ))}
-              </tbody>
-              </table>
-              <button onClick={()=> setEvents([])} className="btn btn-dark btn-lg w-100">Empy React event array</button>
-              </div>
-    )
-  }
+))}
+</tbody>
+</table>
 
-
+</div>
+)
+}
 
 function onEventCreated(createdEvent)
 {
@@ -101,29 +88,7 @@ function onEventCreated(createdEvent)
   alert(`Event Created!, "${createdEvent.name}"`);
 }
 
-function onEventUpdate(updateEvent)
-{
-  setEventCurrentlyBegingUpdated(null);
-
-  if(updateEvent === null){
-    return;
-  }
-
-  let eventsCopy= [...events];
-
-  const index = eventsCopy.findIndex((eventsCopyEvent,currentIndex) =>{
-    if(eventsCopyEvent.eventId === updateEvent.eventId) {
-      return true;
-    }
-  });
-
-  if(index !== -1){
-    eventsCopy[index] = updateEvent;
-  }
-  setEvents(eventsCopy);
-
-  alert (`Event updated`)
-}
+      
     
 
 }
