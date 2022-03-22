@@ -31,7 +31,7 @@ export default function App(){
       <div className='row min-vh-100'>
         <div className='col d-flex flex-cloum justify-content-center align-items-center'>
 
-       {(showingCreateNewEventFrom === false && eventCurrentlyBegingUpdated === null)(
+       {(showingCreateNewEventFrom === false && eventCurrentlyBegingUpdated === null)&&(
          <div>
              <h1>Hello !</h1>
 

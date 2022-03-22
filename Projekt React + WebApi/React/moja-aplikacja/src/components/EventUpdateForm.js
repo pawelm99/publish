@@ -2,8 +2,8 @@ import React, { useState } from "react";
 
 export default function EventUpdateForm(props){
     const initialFormData = Object.freeze({
-        title: props.event.title,
-        content: props.event.content
+        title: props.event.name,
+        content: props.event.date
     });
     const [formData, setFormData] = useState(initialFormData);
 
