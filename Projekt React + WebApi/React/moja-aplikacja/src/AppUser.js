@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import PostCreateForm from './components/UserCreateForm';
+import UserCreateForm from './components/UserCreateForm';
 
 export default function App() {
 const [users,setUsers] = useState([]);
@@ -23,18 +23,29 @@ function getUsers(){
 
 return (
   <div className='container'>
-    <dvi className='row min-vh-100'>
+    <div className='row min-vh-100'>
       <div className='col d-flex flex-cloum justify-content-center align-items-center'>
+
+     {(showingCreateNewPostFrom === false ) && (
+       <div>
+           <h1>Hello !</h1>
+
+  <div className='mt-5'>
+  <button onClick={getUsers} className="btn btn-dark btn-lg w-100">Get User  </button>
+  <button onClick={()=>setShowingCreateNewPostForm(true)} className="btn btn-dark btn-lg w-100">Create User </button>
+  </div>
+  </div>
+     )}
      
-        <div className='mt-5'>
-        <h1><center>Hello User!</center></h1>
-          <button onClick={getUsers} className="btn btn-dark btn-lg w-100">Get Users from server</button>
-          </div>
-        </div>
-        {(users.length > 0) && renderUserTable()}
-      </dvi>
+       
+        {(users.length > 0 && showingCreateNewPostFrom === false)  && renderUserTable()}
+        {showingCreateNewPostFrom && <UserCreateForm onUserCreated = {onPostCreated}/>}
     
-    </div>
+        </div>
+      </div>
+      </div>
+    
+   
   
 );
 

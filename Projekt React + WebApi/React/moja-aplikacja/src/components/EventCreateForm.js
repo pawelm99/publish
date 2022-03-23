@@ -28,7 +28,7 @@ export default function EventCreateForm(props){
 
         const url = 'https://localhost:7156/api/Event';
 
-        fetch(url, {
+        fetch('https://localhost:7156/api/Event', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

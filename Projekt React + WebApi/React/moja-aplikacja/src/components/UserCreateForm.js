@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 
 
-export default function PostCreateForm(props) {
+export default function UserCreateForm(props) {
     const initialFormData = Object.freeze({
-        title: "Post x",
-        content: "This is post x and it has some very interesting content. I have also liked the video and subscribed."
+        Login: "Post x",
+        Password: "This is post x and it has some very interesting content. I have also liked the video and subscribed."
     });
 
     const [formData, setFormData] = useState(initialFormData);
@@ -19,10 +19,10 @@ export default function PostCreateForm(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const postToCreate = {
+        const userToCreated = {
             Id: 0,
-            Login: formData.title,
-            Password: formData.content
+            Login: formData.Login,
+            Password: formData.Password
         };
 
         const url = 'https://localhost:7156/api/User';
@@ -32,7 +32,7 @@ export default function PostCreateForm(props) {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(postToCreate)
+            body: JSON.stringify(userToCreated)
         })
             .then(response => response.json())
             .then(responseFromServer => {
@@ -43,7 +43,7 @@ export default function PostCreateForm(props) {
                 alert(error);
             });
 
-        props.onPostCreated(postToCreate);
+        props.onPostCreated(userToCreated);
     };
 
     return (
@@ -52,12 +52,12 @@ export default function PostCreateForm(props) {
 
             <div className="mt-5">
                 <label className="h3 form-label">Post title</label>
-                <input value={formData.title} name="title" type="text" className="form-control" onChange={handleChange} />
+                <input value={formData.Login} name="title" type="text" className="form-control" onChange={handleChange} />
             </div>
 
             <div className="mt-4">
                 <label className="h3 form-label">Post content</label>
-                <input value={formData.content} name="content" type="text" className="form-control" onChange={handleChange} />
+                <input value={formData.Password} name="content" type="text" className="form-control" onChange={handleChange} />
             </div>
 
             <button onClick={handleSubmit} className="btn btn-dark btn-lg w-100 mt-5">Submit</button>
