@@ -22,7 +22,21 @@ export default function App(){
       alert(error);
     })
   }
-
+function deleteEvent(eventId){
+  const url = `https://localhost:7156/api/Event/${eventId}`;
+  fetch(url,{
+    method:'DELETE'
+  })
+  .then(res=> res.json())
+  .then(resFromServer =>{
+    console.log(resFromServer);
+    onEventDelete(eventId);
+  })
+  .catch((error)=>{
+    console.log(error);
+    alert(error);
+  })
+}
 
 
 
@@ -78,7 +92,7 @@ function renderUserTable()
                     <td>{event.name}</td>
                     <td>{event.date}</td>
                     <td><button onClick={()=> setEventCurrentlyBegingUpdated(event) } className='btn btn-dark btn-lg mx-3 my-3'>UPDATE</button>
-                    <button className='btn btn-secondary btn-lg'>DELETE</button>
+                    <button onClick={()=> {if(window.confirm('Are you sure delete this event?')) deleteEvent(event.id)}} className='btn btn-secondary btn-lg'>DELETE</button>
                      
                      </td>
                     </tr> 
@@ -124,6 +138,21 @@ function onEventUpdate(updateEvent)
 
   alert (`Event updated`)
 }
-    
+function onEventDelete(deleteEventEventId)
+{
+  let eventsCopy = [...events];
+  
+  const index = eventsCopy.findIndex((eventsCopyEvent,currentIndex) =>{
+    if(eventsCopyEvent.eventId === deleteEventEventId) {
+      return true;
+    }
+  });
 
+  if(index !== -1){
+    eventsCopy.splice(index,1);
+  }
+  setEvents(eventsCopy);
+
+  alert (`Event successful delete`);
+}  
 }
