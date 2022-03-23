@@ -20,22 +20,22 @@ export default function App(){
     .catch((error)=>{
       console.log(error);
       alert(error);
-    })
+    });
   }
 function deleteEvent(eventId){
   const url = `https://localhost:7156/api/Event/${eventId}`;
   fetch(url,{
     method:'DELETE'
   })
-  .then(res=> res.json())
-  .then(resFromServer =>{
+  .then(response=> response.json())
+  .then(resFromServer => {
     console.log(resFromServer);
     onEventDelete(eventId);
   })
-  .catch((error)=>{
+  .catch((error) => {
     console.log(error);
     alert(error);
-  })
+  });
 }
 
 

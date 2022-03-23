@@ -7,9 +7,9 @@ namespace Projekt1.Repository
     {
 
         private static List<Event> _events = new List<Event>() {
-            new Event(1, "Zbieranie_jablek", new DateTime(2022,11,16)),
-            new Event(2, "Walka_o_honor", new DateTime(2022,09,05)),
-            new Event(3, "Melanz_w_katowicach", new DateTime(2023,01,03))
+            new Event(1, "Zbieranie_jablek", "2019-01-02"),
+            new Event(2, "Walka_o_honor", "2019-01-02"),
+            new Event(3, "Melanz_w_katowicach", "2019-01-02")
         };
 
         public EventRepository()

@@ -5,6 +5,7 @@ export default function EventCreateForm(props){
         title: "Wydarzenie x",
         content: "2022-03-22T18:16:16.068Z"
     });
+    
     const [formData, setFormData] = useState(initialFormData);
 
     const handleChange = (e) => {
@@ -19,7 +20,7 @@ export default function EventCreateForm(props){
         e.preventDefault();
 
         const eventToCreate ={
-            id: 0,
+            id: "1",
             name: formData.title,
             date: formData.content
 
@@ -45,6 +46,8 @@ export default function EventCreateForm(props){
 
         props.onEventCreated(eventToCreate);
     };
+
+    
 
     return (
         <form className="w-100 px-5">
