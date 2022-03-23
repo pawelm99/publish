@@ -39,7 +39,7 @@ export default function UserCreateForm(props) {
                 console.log(responseFromServer);
             })
             .catch((error) => {
-                console.log(error);
+                console.log('error',error);
                 alert(error);
             });
 
