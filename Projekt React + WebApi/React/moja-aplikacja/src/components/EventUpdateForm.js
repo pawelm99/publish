@@ -25,7 +25,7 @@ export default function EventUpdateForm(props){
 
         };
 
-        const url = 'https://localhost:7156/api/Event/';
+        const url = `https://localhost:7156/api/Event/${props}`;
 
         fetch(url, {
             method: 'PUT',
