@@ -1,6 +1,10 @@
+using Microsoft.AspNetCore;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Projekt1.Interface;
 using Projekt1.Repository;
 using Projekt1.Services;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,9 +16,11 @@ builder.Services.AddCors(options =>
         .AllowAnyHeader()
         .WithOrigins("http://localhost:3000", "https://appname.azurestaticapps.net");
     });
-});
-// Add services to the container.
 
+});
+
+
+// Add services to the container.
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -41,3 +47,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
