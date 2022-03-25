@@ -1,28 +1,59 @@
 
 import { Button } from 'bootstrap';
-import React from 'react';
-
+import React, { Component } from 'react';
+import {useState} from 'react';
+import GoogleLogin from 'react-google-login';
 export default function Login()
 {
+    const [loginData,setLoginData] = useState(
+        localStorage.getItem('loginData')
+        ? JSON.parse(localStorage.getItem('loginData'))
+        : null
+    );
+
+    const handleFailure = (result) => {
+        alert(result);
+    }
+
+    const handleLogin = async (googleData) => {
+        const res = await fetch('/api/google-login', {
+            method: 'POST',
+            body: JSON.stringify({
+                token: googleData.tokenId,
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        const data = await res.json()
+        setLoginData(data);
+        localStorage.setItem('loginData',JSON.stringify(data))
+    };
+
     
-    function onSignIn(googleUser) {
-        var profile = googleUser.getBasicProfile();
-        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-        console.log('Name: ' + profile.getName());
-        console.log('Image URL: ' + profile.getImageUrl());
-        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-      }
+
+   
 
 return(
-    <div><h1><center>Login Page.</center></h1>
-
-
-
-      <div class="g-signin2" data-onsuccess="onSignIn"></div>
-     
-      
-    
-    
+    <div className='Login'>
+        <header className='Login-header'>
+            <h1>React Google Login</h1>
+            <div>
+                {loginData ? (
+                    <div>
+                        <h3>You logged in as {loginData.email}</h3>
+                        </div>
+                ): (
+                <GoogleLogin 
+                clientId = {process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                buttonText="Log in with Google"
+                onSuccess ={handleLogin}
+                onFailure = {handleFailure}
+                cookiePolicy={'single_host_origin'}
+                ></GoogleLogin>
+                )}
+            </div>
+        </header>
     </div>
     
 )
