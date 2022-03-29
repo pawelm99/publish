@@ -30,27 +30,32 @@ export default function Login()
         localStorage.setItem('loginData',JSON.stringify(data))
     };
 
-    
+    const handleLogout =() =>{
+        localStorage.removeItem('loginData');
+        setLoginData(null);
+
+    }
 
    
 
 return(
     <div className='Login'>
         <header className='Login-header'>
-            <h1>React Google Login</h1>
+            <center><h1>React Google Login</h1></center>
             <div>
                 {loginData ? (
                     <div>
                         <h3>You logged in as {loginData.email}</h3>
+                        <center><button onClick={handleLogout}>Logout</button></center>
                         </div>
                 ): (
-                <GoogleLogin 
+                    <center><GoogleLogin 
                 clientId = {process.env.REACT_APP_GOOGLE_CLIENT_ID}
                 buttonText="Log in with Google"
                 onSuccess ={handleLogin}
                 onFailure = {handleFailure}
                 cookiePolicy={'single_host_origin'}
-                ></GoogleLogin>
+                ></GoogleLogin></center>
                 )}
             </div>
         </header>
