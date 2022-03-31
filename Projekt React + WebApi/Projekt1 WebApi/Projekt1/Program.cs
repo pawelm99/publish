@@ -32,16 +32,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IEventService, EventService>();
 
-builder.Services.AddAuthentication()
-    .AddCookie(opt =>
-    {
-        opt.LoginPath = "/account/google";
-    })
-    .AddGoogle(googleOptions =>
-{
-    googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
-    googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
-});
+
 
 
 var app = builder.Build();

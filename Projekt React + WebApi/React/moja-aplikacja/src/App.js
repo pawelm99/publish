@@ -14,7 +14,7 @@ return(
   <div className="App">
     <Navbar bg='dark' variant='dark' sticky='top' expand="lg">
       <Navbar.Brand>
-         Apps
+         App
       </Navbar.Brand>
 
       <Navbar.Toggle/>
