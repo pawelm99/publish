@@ -1,10 +1,10 @@
 import React from 'react'
-import Products from './component/Products';
-
+import {Products, Navbar} from './component';
 
 const App = ()=>{
     return(
     <div>
+       <Navbar/>
         <Products/>
 
     </div> 
