@@ -1,69 +1,78 @@
-
-import { Button } from 'bootstrap';
-import React, { Component } from 'react';
-import {useState} from 'react';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import GoogleLogin from 'react-google-login';
-export default function Login()
-{
-    const [loginData,setLoginData] = useState(
-        localStorage.getItem('loginData')
-        ? JSON.parse(localStorage.getItem('loginData'))
-        : null
-    );
+// or
+import { useGoogleLogin } from 'react-google-login';
+import { GoogleLogout } from 'react-google-login';
 
-    const handleFailure = (result) => {
-        alert(result);
-    }
 
-    const handleLogin = async (googleData) => {
-        const res = await fetch('/api/google-login', {
-            method: 'POST',
-            body: JSON.stringify({
-                token: googleData.tokenId,
-            }),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-        const data = await res.json()
-        setLoginData(data);
-        localStorage.setItem('loginData',JSON.stringify(data))
-    };
 
-    const handleLogout =() =>{
-        localStorage.removeItem('loginData');
-        setLoginData(null);
+var test;
+var email;
 
-    }
-
-   
-
-return(
-    <div className='Login'>
-        <header className='Login-header'>
-            <center><h1>React Google Login</h1></center>
-            <div>
-                {loginData ? (
-                    <div>
-                        <h3>You logged in as {loginData.email}</h3>
-                        <center><button onClick={handleLogout}>Logout</button></center>
-                        </div>
-                ): (
-                    <center><GoogleLogin 
-                clientId = {process.env.REACT_APP_GOOGLE_CLIENT_ID}
-                buttonText="Log in with Google"
-                onSuccess ={handleLogin}
-                onFailure = {handleFailure}
-                cookiePolicy={'single_host_origin'}
-                ></GoogleLogin></center>
-                )}
-            </div>
-        </header>
-    </div>
-    
-)
+const responseGoogle = (response) => {
+  console.log(response);
 
 }
 
+function show()
+{
+  console.log(test);
+  console.log(email);
+}
+
+
+
+export default function Login()
+{
+
   
 
+  const onSuccess = (res) =>{
+    console.log("Login successfully",res.profileObj);
+    test =res.profileObj.name;
+    email = res.profileObj.email;
+
+     
+                        
+                       
+                    
+  
+}
+const onFailure = (res) => {
+    console.log('Login failed: res:', res);
+    alert(
+        `Failed to login.`
+    );
+};
+const {signIn, loaded} = useGoogleLogin ({
+    onSuccess,
+    onFailure,
+   
+    isSignedIn: true,
+    accessType: 'offline',
+})
+
+
+
+  return(
+    <div> 
+   
+    <GoogleLogin
+  
+  clientId="1068235831600-rgv06hchncuc7kk2fpl39o7gsnk20uh9.apps.googleusercontent.com"
+  buttonText="Login"
+onSuccess={responseGoogle}
+onFailure={responseGoogle}
+cookiePolicy={'single_host_origin'}
+isSignedIn={true}
+
+  ></GoogleLogin> 
+ 
+<button onClick={show}></button>
+  </div>
+  )}
+ 
+  
+ 
+    
