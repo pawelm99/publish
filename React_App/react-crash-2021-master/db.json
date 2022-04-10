@@ -15,14 +15,6 @@
       "mass": "136",
       "eye_color": "yellow",
       "gender": "male"
-    },
-    {
-      "name": "Leia",
-      "height": "150",
-      "mass": "49",
-      "eye_color": "brown",
-      "gender": "female",
-      "id": 3
     }
   ]
 }
