@@ -28,6 +28,7 @@ import { useState } from 'react'
   }
 
   return (
+    
     <form className='add-form' onSubmit={onSubmit}>
       <div className='form-control'>
         <label>Name</label>
@@ -67,12 +68,18 @@ import { useState } from 'react'
       </div>
       <div className='form-control'>
         <label>Gender</label>
-        <input
-          type='text'
-          placeholder='Add gender'
-          value={gender}
-          onChange={(e) => setGender(e.target.value)}
-        />
+        <select  value={gender}
+         onClick={(e)=> setGender(e.target.value)}>
+        <option value="male">male</option>
+        <option value="female">female</option>
+        </select> 
+        
+        
+        
+    
+       
+
+            
       </div>
 
       <input type='submit' value='Save Character' className='btn btn-block' />
