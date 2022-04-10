@@ -59,14 +59,18 @@ import { useState } from 'react'
         />
       </div>
       <div className='form-control'>
-        <label>Eye color</label>
+        <label >Eye color</label>
         <select  
+         labelId="demo-simple-select-label"
+         id="demo-simple-select"
         value={eye_color}
          onChange={(e)=> setEye(e.target.value)}>
+           
         <option value="blue">Blue</option>
         <option value="yellow">Yellow</option>
         <option value="brown">Brown</option>
         <option selected value="brown">Brown</option>
+        
         </select> 
       </div>
       <div className='form-control'>

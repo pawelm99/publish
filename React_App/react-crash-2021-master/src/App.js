@@ -9,6 +9,7 @@ import About from './components/About'
 const App = () => {
   const [showAddTask, setShowAddTask] = useState(false)
   const [tasks, setTasks] = useState([])
+  
 
   useEffect(() => {
     const getTasks = async () => {
@@ -23,6 +24,7 @@ const App = () => {
   const fetchTasks = async () => {
     const res = await fetch('http://localhost:5000/tasks')
     const data = await res.json()
+    
 
     return data
   }
@@ -31,6 +33,8 @@ const App = () => {
   const fetchTask = async (id) => {
     const res = await fetch(`http://localhost:5000/tasks/${id}`)
     const data = await res.json()
+
+    
 
     return data
   }
@@ -78,6 +82,7 @@ const App = () => {
       body: JSON.stringify(updTask),
     })
 
+
     const data = await res.json()
 
     setTasks(
@@ -87,8 +92,49 @@ const App = () => {
     )
   }
 
+  //Comparer Function    
+function GetSortOrder(prop) {    
+  return function(a, b) {    
+      if (a[prop] > b[prop]) {    
+          return 1;    
+      } else if (a[prop] < b[prop]) {    
+          return -1;    
+      }    
+      return 0;    
+  }    
+}    
+
+  const sortH=()=>{
+    
+    
+    
+    tasks.sort(GetSortOrder("height"));
+
+    
+    console.log(tasks);
+    
+  }
+
+  const sortM=()=>{
+    
+    
+    
+    tasks.sort(GetSortOrder("mass"));
+
+
+    
+    console.log(tasks);
+    
+    
+    
+  }
+
+
+
+
   return (
     <Router>
+     
       <div className='container'>
         <Header
           onAdd={() => setShowAddTask(!showAddTask)}
@@ -99,22 +145,27 @@ const App = () => {
             path='/'
             element={
               <>
-                {showAddTask && <AddTask onAdd={addTask} />}
+                {showAddTask && <AddTask onAdd={addTask}  />}
                 {tasks.length > 0 ? (
-                  <Tasks
+                  <Tasks 
                     tasks={tasks}
                     onDelete={deleteTask}
                     onToggle={toggleReminder}
                   />
+                  
                 ) : (
                   'No CHaracter To Show'
                 )}
               </>
             }
           />
+          
           <Route path='/about' element={<About />} />
         </Routes>
         <Footer />
+        <button onClick={sortH} className="btn" >Sort Height</button>
+        <button onClick={sortM} className="btn" >Sort Mass</button>
+        
       </div>
     </Router>
   )
