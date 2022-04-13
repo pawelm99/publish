@@ -37,6 +37,11 @@ require("jquery-nice-select");
   useEffect(() => {
     $(selectRef.current).niceSelect();
   }, []);
+
+  const selectRef2 = useRef();
+  useEffect(() => {
+    $(selectRef2.current).niceSelect();
+  }, []);
   
 
 
@@ -72,41 +77,44 @@ require("jquery-nice-select");
         />
       </div>
 
-      
       <div className="App">
       <form onSubmit={onSubmit}>
-      <p>
+        <p>
+      <label>Color</label>
         <select ref={selectRef} className='wide'
         value={eye_color}
          onChange={(e)=> setEye(e.target.value)}>
-         
         <option value="blue">Blue</option>
         <option value="yellow">Yellow</option>
         <option value="brown">Brown</option>
         <option selected value="brown">Brown</option>
-      
         </select> 
         </p>
-        </form>
+      </form>
       </div>
-      <div className='form-control'>
+      
+    <div className="App">
+      <form onSubmit={onSubmit}>
+        <p>
+      
         <label>Gender</label>
-        <select  
-        value={gender}
+        <select  ref={selectRef2}
+        value={gender} className="wide"
          onChange={(e)=> setGender(e.target.value)}>
         <option value="male">Male</option>
         <option value="female">Female</option>
         <option selected value="male">Male</option>
         </select> 
         
-        
+        </p>
+        </form>
         
     
        
 
             
       </div>
-
+      
       <input type='submit' value='Save Character' className='btn btn-block' />
     </form>
   )
