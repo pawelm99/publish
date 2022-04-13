@@ -1,6 +1,11 @@
 import { useState } from 'react'
+import { useEffect, useRef } from "react";
+import $ from "jquery";
+import "../components/styless.css";
+import "jquery-nice-select/css/style.css";
 
-
+window.jQuery = window.$ = $;
+require("jquery-nice-select");
 
 
   const AddPerson = ({ onAdd }) => {
@@ -10,6 +15,7 @@ import { useState } from 'react'
     const [eye_color, setEye] = useState('')
     const [gender, setGender] = useState('')
 
+    
   const onSubmit = (e) => {
     e.preventDefault()
 
@@ -26,6 +32,13 @@ import { useState } from 'react'
     setEye('')
     setGender('')
   }
+
+  const selectRef = useRef();
+  useEffect(() => {
+    $(selectRef.current).niceSelect();
+  }, []);
+  
+
 
 
   return (
@@ -58,20 +71,23 @@ import { useState } from 'react'
           onChange={(e) => setMass(e.target.value)}
         />
       </div>
-      <div className='form-control'>
-        <label >Eye color</label>
-        <select  
-         labelId="demo-simple-select-label"
-         id="demo-simple-select"
+
+      
+      <div className="App">
+      <form onSubmit={onSubmit}>
+      <p>
+        <select ref={selectRef} className='wide'
         value={eye_color}
          onChange={(e)=> setEye(e.target.value)}>
-           
+         
         <option value="blue">Blue</option>
         <option value="yellow">Yellow</option>
         <option value="brown">Brown</option>
         <option selected value="brown">Brown</option>
-        
+      
         </select> 
+        </p>
+        </form>
       </div>
       <div className='form-control'>
         <label>Gender</label>
