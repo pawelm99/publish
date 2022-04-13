@@ -23,14 +23,125 @@
       "mass": "49",
       "eye_color": "brown",
       "gender": "female"
-  },
-  {
-      "id": 4,
-      "name": "Anakin Skywalker",
-      "height": "188",
-      "mass": "84",
+    },
+    {
+      "name": "sdfs",
+      "height": "34",
+      "mass": "34",
+      "eye_color": "",
+      "gender": "",
+      "id": 4
+    },
+    {
+      "name": "123",
+      "height": "34",
+      "mass": "34",
+      "eye_color": "",
+      "gender": "",
+      "id": 5
+    },
+    {
+      "name": "sdf",
+      "height": 0,
+      "mass": 0,
+      "eye_color": "",
+      "gender": "",
+      "id": 6
+    },
+    {
+      "name": "dsfsdf",
+      "height": "34",
+      "mass": "34",
+      "eye_color": "",
+      "gender": "",
+      "id": 7
+    },
+    {
+      "name": "sdgfsd",
+      "height": "423",
+      "mass": "123",
+      "eye_color": "",
+      "gender": "",
+      "id": 8
+    },
+    {
+      "name": "gdsg",
+      "height": "34",
+      "mass": "12",
+      "eye_color": "duoa",
+      "gender": "",
+      "id": 9
+    },
+    {
+      "name": "fdsgdfg",
+      "height": "232",
+      "mass": "41",
+      "gender": "",
+      "id": 10
+    },
+    {
+      "name": "dsfsd",
+      "height": "234",
+      "mass": "243",
+      "selected": "yellow",
+      "gender": "",
+      "id": 11
+    },
+    {
+      "name": "sdfsdf",
+      "height": "34",
+      "mass": "234",
+      "selected": "blue",
+      "gender": "",
+      "id": 12
+    },
+    {
+      "name": "sdfsd",
+      "height": "3434",
+      "mass": "3443",
+      "eye_color": "",
+      "gender": "",
+      "id": 13
+    },
+    {
+      "name": "432243",
+      "height": "234",
+      "mass": "234",
+      "eye_color": "",
+      "gender": "",
+      "id": 14
+    },
+    {
+      "name": "erdsfgs",
+      "height": "23",
+      "mass": "234",
+      "eye_color": "yellow",
+      "gender": "",
+      "id": 15
+    },
+    {
+      "name": "dsfsd",
+      "height": "123",
+      "mass": "312",
+      "selected": "brown",
+      "gender": "",
+      "id": 16
+    },
+    {
+      "name": "dziala",
+      "height": "32",
+      "mass": "42",
+      "eye_color": "yellow",
+      "gender": "female",
+      "id": 17
+    },
+    {
+      "name": "dz2",
+      "height": "324",
+      "mass": "234",
       "eye_color": "blue",
-      "gender": "male"
-  }
+      "gender": "male",
+      "id": 18
+    }
   ]
 }
