@@ -1,20 +1,47 @@
 import { useState } from 'react'
+import { useEffect, useRef } from "react";
+import $ from "jquery";
+import "../components/styless.css";
+import "jquery-nice-select/css/style.css";
 
-
+window.jQuery = window.$ = $;
+require("jquery-nice-select");
 
 
   const AddPerson = ({ onAdd }) => {
     const [name, setName] = useState('')
     const [height, setHeight] = useState('')
     const [mass, setMass] = useState('')
-    const [eye_color, setEye] = useState('')
-    const [gender, setGender] = useState('')
+    var [eye_color, setEye] = useState('')
+    var [gender, setGender] = useState('')
+
+    
+
+    const selectRef = useRef();
+    const selectRef2 = useRef();
+    useEffect(() => {
+      $(selectRef.current).niceSelect();
+      $(selectRef2.current).niceSelect();
+    }, []);
+
+    
+
+  
+
 
   const onSubmit = (e) => {
     e.preventDefault()
+    let selected = $(selectRef.current).val();
+    let selected2 = $(selectRef2.current).val();
+    eye_color = selected;
+    gender = selected2;
 
     if (!name) {
       alert('Please add a person')
+      return
+    }
+    if (!eye_color) {
+      alert('Please add a eye')
       return
     }
 
@@ -25,7 +52,11 @@ import { useState } from 'react'
     setMass(0)
     setEye('')
     setGender('')
+
   }
+
+  
+
 
 
   return (
@@ -58,39 +89,40 @@ import { useState } from 'react'
           onChange={(e) => setMass(e.target.value)}
         />
       </div>
-      <div className='form-control'>
-        <label >Eye color</label>
-        <select  
-         labelId="demo-simple-select-label"
-         id="demo-simple-select"
-        value={eye_color}
-         onChange={(e)=> setEye(e.target.value)}>
-           
+
+      <div className="form-control" onSubmit={onSubmit}>
+    
+      
+      <label>Color</label>
+        <select ref = {selectRef} className='wide'
+       
+         onClick={(e)=> setEye(e.target.value)}>
         <option value="blue">Blue</option>
         <option value="yellow">Yellow</option>
         <option value="brown">Brown</option>
-        <option selected value="brown">Brown</option>
-        
         </select> 
+       
       </div>
-      <div className='form-control'>
+      
+    <div className="form-control">
+   
+      
         <label>Gender</label>
-        <select  
-        value={gender}
+        <select  ref = {selectRef2}
+        value={gender} className="wide"
          onChange={(e)=> setGender(e.target.value)}>
         <option value="male">Male</option>
         <option value="female">Female</option>
         <option selected value="male">Male</option>
         </select> 
         
-        
-        
+     
     
        
 
             
       </div>
-
+      
       <input type='submit' value='Save Character' className='btn btn-block' />
     </form>
   )
