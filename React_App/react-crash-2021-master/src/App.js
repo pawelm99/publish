@@ -6,10 +6,10 @@ import Tasks from './components/Tasks'
 import AddTask from './components/AddPerson'
 import About from './components/About'
 
-const App = () => {
+const App = ({ onAdd }) => {
   const [showAddTask, setShowAddTask] = useState(false)
   const [tasks, setTasks] = useState([])
-  
+  const [names,setName] = useState('');
 
   useEffect(() => {
     const getTasks = async () => {
@@ -109,9 +109,13 @@ function GetSortOrder(prop) {
     
     
     tasks.sort(GetSortOrder("height"));
+    setShowAddTask();
+    
 
     
-    console.log(tasks);
+    
+    
+    alert("refresh page if you want different sort");
     
   }
 
@@ -120,19 +124,47 @@ function GetSortOrder(prop) {
     
     
     tasks.sort(GetSortOrder("mass"));
-
-
+    setShowAddTask();
     
-    console.log(tasks);
+    
+    alert("refresh page if you want different sort");
     
     
     
   }
 
+  function refreshPage()
+  {
+      window.location.reload();
+  }
 
 
+
+const onSubmit = (e)=>{
+  e.preventDefault();
+
+  if (!names) {
+    alert('Please write name')
+    return
+  }
+
+  onAdd({ names })
+
+  setName('')
+  
+}
+
+function filter()
+{
+  
+  console.log(names);
+  var res =tasks.map(x=>x.name).filter(name => name.includes(names)).map(filteredName => (filteredName));
+  var toString = res.toString(); 
+  alert(toString);
+}
 
   return (
+    
     <Router>
      
       <div className='container'>
@@ -165,7 +197,17 @@ function GetSortOrder(prop) {
         <Footer />
         <button onClick={sortH} className="btn" >Sort Height</button>
         <button onClick={sortM} className="btn" >Sort Mass</button>
-        
+        <button onClick={refreshPage} className="btn" >Refresh Page</button>
+        <div className='form-control'>
+        <label>Filter input first name</label>
+        <input
+          type='text'
+          placeholder='Wrtie first-name'
+          value={names}
+          onChange={(e) => setName(e.target.value)}
+        />
+      </div>
+        <button onClick={filter} className="btn" >Filter</button>
       </div>
     </Router>
   )
