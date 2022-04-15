@@ -61,7 +61,7 @@ const {signIn, loaded} = useGoogleLogin ({
   return(
     <div> 
    
-    <GoogleLogin
+   <center><h1>Zaloguj sie</h1> <GoogleLogin
   
   clientId="1068235831600-rgv06hchncuc7kk2fpl39o7gsnk20uh9.apps.googleusercontent.com"
   buttonText="Login"
@@ -70,10 +70,11 @@ onFailure={responseGoogle}
 cookiePolicy={'single_host_origin'}
 isSignedIn={true}
 
-  ></GoogleLogin> 
-  <p>Witaj: {name}</p>
-  <p>Email: {email}</p>
-<button className="btn btn-dark" onClick={()=>(setName(nameG),setEmail(emailG))}>Button</button>
+  ></GoogleLogin></center> 
+
+  <center><p>Witaj: {name}</p></center>
+  <center> <p>Email: {email}</p></center>
+<center><button className="btn btn-dark" onClick={()=>(setName(nameG),setEmail(emailG))}>Button</button></center>
 
   </div>
   )}
