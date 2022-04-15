@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
 import GoogleLogin from 'react-google-login';
 // or
@@ -7,8 +7,9 @@ import { GoogleLogout } from 'react-google-login';
 
 
 
-var test;
-var email;
+var nameG;
+var emailG;
+
 
 const responseGoogle = (response) => {
   console.log(response);
@@ -17,8 +18,9 @@ const responseGoogle = (response) => {
 
 function show()
 {
-  console.log(test);
-  console.log(email);
+  console.log(nameG);
+  console.log(emailG);
+  
 }
 
 
@@ -26,12 +28,13 @@ function show()
 export default function Login()
 {
 
-  
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
 
   const onSuccess = (res) =>{
     console.log("Login successfully",res.profileObj);
-    test =res.profileObj.name;
-    email = res.profileObj.email;
+    nameG =res.profileObj.name;
+    emailG = res.profileObj.email;
 
      
                         
@@ -68,8 +71,10 @@ cookiePolicy={'single_host_origin'}
 isSignedIn={true}
 
   ></GoogleLogin> 
- 
-<button onClick={show}></button>
+  <p>Witaj: {name}</p>
+  <p>Email: {email}</p>
+<button className="btn btn-dark" onClick={()=>(setName(nameG),setEmail(emailG))}>Button</button>
+
   </div>
   )}
  
