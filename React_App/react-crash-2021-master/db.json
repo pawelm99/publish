@@ -6,7 +6,8 @@
       "height": 172,
       "mass": 77,
       "eye_color": "blue",
-      "gender": "male"
+      "gender": "male",
+      "reminder": false
     },
     {
       "id": 2,
@@ -31,6 +32,6 @@
       "mass": 140,
       "eye_color": "blue",
       "gender": "male"
-   }
+    }
   ]
 }

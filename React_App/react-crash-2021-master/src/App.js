@@ -5,26 +5,33 @@ import Footer from './components/Footer'
 import Tasks from './components/Tasks'
 import AddTask from './components/AddPerson'
 import About from './components/About'
+import { get } from 'jquery'
 
 const App = ({ onAdd }) => {
   const [showAddTask, setShowAddTask] = useState(false)
   const [tasks, setTasks] = useState([])
   const [names,setName] = useState('');
+  const [sortH, setSortH] = useState(false);
+
 
   useEffect(() => {
     const getTasks = async () => {
       const tasksFromServer = await fetchTasks()
+     
       setTasks(tasksFromServer)
     }
 
     getTasks()
   }, [])
 
+   
+
+ 
   // Fetch Tasks
   const fetchTasks = async () => {
     const res = await fetch('http://localhost:5000/tasks')
     const data = await res.json()
-    
+ 
 
     return data
   }
@@ -84,7 +91,7 @@ const App = ({ onAdd }) => {
 
 
     const data = await res.json()
-
+  
     setTasks(
       tasks.map((task) =>
         task.id === id ? { ...task, reminder: data.reminder } : task
@@ -104,41 +111,15 @@ function GetSortOrder(prop) {
   }    
 }    
 
-  const sortH=()=>{
-    
-    
-    
-    tasks.sort(GetSortOrder("height"));
-    setShowAddTask();
-    
 
-    
-    
-    
-    alert("refresh page if you want different sort");
-    
-  }
-
-  const sortM=()=>{
-    
-    
-    
-    tasks.sort(GetSortOrder("mass"));
-    setShowAddTask();
-    
-    
-    alert("refresh page if you want different sort");
-    
-    
-    
-  }
 
   function refreshPage()
   {
       window.location.reload();
   }
 
-
+  const updateTaskHeight=()=> setSortH(true)
+  const updateTaskMass=()=> setSortH(false)
 
 const onSubmit = (e)=>{
   e.preventDefault();
@@ -178,11 +159,14 @@ function filter()
             element={
               <>
                 {showAddTask && <AddTask onAdd={addTask}  />}
-                {tasks.length > 0 ? (
+                {tasks.length > 0 ? 
+                (
                   <Tasks 
                     tasks={tasks}
                     onDelete={deleteTask}
                     onToggle={toggleReminder}
+                    sortHeight={sortH}
+                    sortMass={sortH}
                   />
                   
                 ) : (
@@ -195,8 +179,8 @@ function filter()
           <Route path='/about' element={<About />} />
         </Routes>
         <Footer />
-        <button onClick={sortH} className="btn" >Sort Height</button>
-        <button onClick={sortM} className="btn" >Sort Mass</button>
+        <button onClick={updateTaskHeight} className="btn" >Sort Height</button>
+        <button onClick={updateTaskMass} className="btn" >Sort Mass</button>
         <button onClick={refreshPage} className="btn" >Refresh Page</button>
         <div className='form-control'>
         <label>Filter input first name</label>
