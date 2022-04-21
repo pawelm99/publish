@@ -5,7 +5,6 @@ import Footer from './components/Footer'
 import Tasks from './components/Tasks'
 import AddTask from './components/AddPerson'
 import About from './components/About'
-import { get } from 'jquery'
 
 const App = ({ onAdd }) => {
   const [showAddTask, setShowAddTask] = useState(false)
@@ -99,17 +98,6 @@ const App = ({ onAdd }) => {
     )
   }
 
-  //Comparer Function    
-function GetSortOrder(prop) {    
-  return function(a, b) {    
-      if (a[prop] > b[prop]) {    
-          return 1;    
-      } else if (a[prop] < b[prop]) {    
-          return -1;    
-      }    
-      return 0;    
-  }    
-}    
 
 
 
@@ -121,19 +109,7 @@ function GetSortOrder(prop) {
   const updateTaskHeight=()=> setSortH(true)
   const updateTaskMass=()=> setSortH(false)
 
-const onSubmit = (e)=>{
-  e.preventDefault();
 
-  if (!names) {
-    alert('Please write name')
-    return
-  }
-
-  onAdd({ names })
-
-  setName('')
-  
-}
 
 function filter()
 {
