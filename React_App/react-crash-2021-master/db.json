@@ -23,7 +23,8 @@
       "height": 150,
       "mass": 49,
       "eye_color": "brown",
-      "gender": "female"
+      "gender": "female",
+      "reminder": true
     },
     {
       "id": 4,
