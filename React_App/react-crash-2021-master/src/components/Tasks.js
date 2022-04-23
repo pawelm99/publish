@@ -1,9 +1,7 @@
-
 import Task from './Task'
 
-const Tasks = ({ tasks, onDelete, onToggle,sortHeight,filterName }) => {
+const Tasks = ({ tasks, onDelete, onToggle,sortHeight }) => {
  
-
   if(sortHeight ===true)
   {
     tasks.sort((a,b)=>{
@@ -16,7 +14,7 @@ const Tasks = ({ tasks, onDelete, onToggle,sortHeight,filterName }) => {
       return 0;
     })
   }
-  else if(sortHeight === false)
+  else
   {
     tasks.sort((a,b)=>{
       if (a.mass < b.mass) {
@@ -29,16 +27,7 @@ const Tasks = ({ tasks, onDelete, onToggle,sortHeight,filterName }) => {
     })
   }
 
-  if(filterName != null )
-  {
-  
-   console.log(filterName)
-    tasks = filterName;
-    
-  }
-  
-
-  
+  console.log(tasks);
   return (
     <>
       { 

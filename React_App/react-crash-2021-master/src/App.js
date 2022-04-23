@@ -11,7 +11,6 @@ const App = ({ onAdd }) => {
   const [tasks, setTasks] = useState([])
   const [names,setName] = useState('');
   const [sortH, setSortH] = useState(false);
-  const [filterName,funFilterName] = useState();
 
 
   useEffect(() => {
@@ -74,7 +73,6 @@ const App = ({ onAdd }) => {
     res.status === 200
       ? setTasks(tasks.filter((task) => task.id !== id))
       : alert('Error Deleting This Task')
-     
   }
 
   // Toggle Reminder
@@ -119,18 +117,13 @@ function filter()
  
   //var res =tasks.map(x=>x.name).filter(name => name.includes(names)).map(filteredName => (filteredName));
  
-  var tasksFind = tasks.filter(x=>x.name == names)
-  if(tasksFind != null)
-  {
-    console.log(tasksFind)
-    funFilterName(tasksFind)
-    setName('')
-  }
-  else
-  {
-    alert("Name not find!")
-  }
-  
+
+
+
+  console.log(names);
+  var res =tasks.map(x=>x.name).filter(name => name.includes(names)).map(filteredName => (filteredName));
+  var toString = res.toString(); 
+  alert(toString);
 
 }
 
@@ -157,7 +150,6 @@ function filter()
                     onToggle={toggleReminder}
                     sortHeight={sortH}
                     sortMass={sortH}
-                    filterName={filterName}
                   />
                   
                 ) : (
