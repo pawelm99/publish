@@ -118,8 +118,8 @@ function filter()
   
  
   //var res =tasks.map(x=>x.name).filter(name => name.includes(names)).map(filteredName => (filteredName));
-  var namee = names;
-  var tasksFind = tasks.filter(x=>x.name === names)
+ 
+  var tasksFind = tasks.filter(x=>x.name == names)
   if(tasksFind != null)
   {
     console.log(tasksFind)
