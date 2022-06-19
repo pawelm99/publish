@@ -1,7 +1,7 @@
 //import 'bootstrap/dist/css/bootstrap.css'
 import {Nav, Navbar, NavDropdown} from 'react-bootstrap'
 import NavbarToggle from 'react-bootstrap/esm/NavbarToggle';
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+  import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import React from 'react'
 import './index.css';
 

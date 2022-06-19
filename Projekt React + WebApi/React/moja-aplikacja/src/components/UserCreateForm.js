@@ -25,7 +25,7 @@ export default function UserCreateForm(props) {
             Password: formData.Password
         };
 
-        const url = 'https://localhost:7156/api/User';
+        const url = 'https://localhost:7156/api/User';  
 
         fetch(url, {
             method: 'POST',

@@ -32,7 +32,7 @@ return (
 
   <div className='mt-5'>
   <button onClick={getUsers} className="btn btn-dark btn-lg w-100">Get User  </button>
-  <button onClick={()=>setShowingCreateNewPostForm(true)} className="btn btn-dark btn-lg w-100">Create User </button>
+  <button onClick={()=>setShowingCreateNewPostForm(true)} className="btn btn-dark btn-lg">Create User </button>
   </div>
   </div>
      )}
