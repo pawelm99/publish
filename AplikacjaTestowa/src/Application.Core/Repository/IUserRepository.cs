@@ -10,7 +10,7 @@ namespace Application.Core.Repository
     public interface IUserRepository
     {
         Task<User> GetAsync(Guid id);
-        Task<User> GetAsync(string name);
+        Task<User> GetAsync(string email);
         Task AddAsync(User user);
         Task UpdateAsync(User user);
         Task DeleteAsync(User user);

@@ -1,11 +1,23 @@
+using Application.Core.Repository;
+using Application.Infrastructure.Mappers;
+using Application.Infrastructure.Repositories;
+using Application.Infrastructure.Services;
+using AutoMapper;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+var services = builder.Services;
+services.AddControllers();
+services.AddEndpointsApiExplorer();
+services.AddSwaggerGen();
+services.AddScoped<IEventRepository, EventRepository>();
+services.AddScoped<IEventService, EventService>();
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+services.AddScoped<IUserRepository, UserRepository>();
+//services.AddScoped<IUserService, UserService>();
+services.AddSingleton(AutoMapperConfig.Initialzie());
+
 
 var app = builder.Build();
 

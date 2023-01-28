@@ -16,7 +16,9 @@ namespace Application.Core.Domain
         public DateTime EndDate { get; protected set; }
         public DateTime UpdatedAt { get; protected set; }
         public IEnumerable<Tickets> Tickets => _tickets;
-
+        public IEnumerable<Tickets> PurchatesTickets => Tickets.Where(x=>x.Purchased == true);
+        public IEnumerable<Tickets> AvailiableTickets => Tickets.Except(PurchatesTickets);
+        
         protected Event()
         {
 
@@ -25,15 +27,32 @@ namespace Application.Core.Domain
         public Event(Guid id,string name, string description, DateTime startDate, DateTime endDate)
         {
             Id = id;
-            Name = name;
-            Description = description;
+            SetName(name);
+            SetDescription(description);
             StartDate = startDate;
             EndDate = endDate;
             CreateAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;
         }
-
-        public void Add(int amount,decimal price)
+        public void SetName(string name)
+        {
+            if(string.IsNullOrWhiteSpace(name))
+            {
+                throw new Exception($"Event with id: {Id} can not have an empty name.");
+            }
+            Name = name;
+            UpdatedAt = DateTime.UtcNow;
+        }
+        public void SetDescription(string desc)
+        {
+            if (string.IsNullOrWhiteSpace(desc))
+            {
+                throw new Exception($"Event with id: {Id} can not have an empty description.");
+            }
+            Description = desc;
+            UpdatedAt = DateTime.UtcNow;
+        }
+        public void AddTickets(int amount,decimal price)
         {
             var seating = _tickets.Count + 1;
             for (int i = 0; i < amount; i++)
